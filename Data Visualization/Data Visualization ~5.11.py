@@ -71,7 +71,6 @@ df1[["이름", "키"]]
 
 # Data Frame 객체 생성 + index 지정
 df2 = pandas.DataFrame(data, index=["1번","2번","3번","4번","5번","6번","7번","8번"])
-df2
 #  이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 1번  채치수  북산고  197   90   85  100  95  85      Python
 # 2번  정대만  북산고  184   40   35   50  55  25        Java
@@ -83,7 +82,6 @@ df2
 
 # Data Frame 객체 생성 + column 지정
 df3 = pandas.DataFrame(data, columns=["이름","학교"])
-df3
 # 이름   학교
 # 0  채치수  북산고
 # 1  정대만  북산고
@@ -97,7 +95,6 @@ df3
 
 # 03. Index (데이터 접근을 위한 주소값)
 df2.index.name = "지원번호"
-df2
 #        이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 지원번호
 # 1번    채치수  북산고  197   90   85  100  95  85      Python
@@ -112,7 +109,6 @@ df2
 # index 초기화
 # print(df.reset_index(drop=True, inplace=True))
 df2.reset_index(drop=True, inplace=True)
-df2
 #     이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 0  채치수  북산고  197   90   85  100  95  85      Python
 # 1  정대만  북산고  184   40   35   50  55  25        Java
@@ -125,7 +121,6 @@ df2
 
 # 지정한 column의 index를 설정할 수 있음
 df2.set_index("이름",inplace=True)
-df2
 #       학교    키   국어   영어   수학  과학  사회        SW특기
 # 이름
 # 채치수  북산고  197   90   85  100  95  85      Python
@@ -139,7 +134,6 @@ df2
 
 # index를 차순 정렬이 가능함
 df2.sort_index()
-df2
 #       학교    키   국어   영어   수학  과학  사회        SW특기
 # 이름
 # 채치수  북산고  197   90   85  100  95  85      Python
@@ -152,7 +146,6 @@ df2
 # 윤대협  능남고  190  100   85   90  95  95          C#
 
 df2.sort_index(ascending=False)
-df2
 #       학교    키   국어   영어   수학  과학  사회        SW특기
 # 이름
 # 채치수  북산고  197   90   85  100  95  85      Python
@@ -171,7 +164,6 @@ df = pandas.DataFrame(data)
 # csv 파일 저장 및 열기
 df.to_csv("csv_.csv",encoding="utf-16")
 csv_ = pandas.read_csv("csv_.csv",encoding="utf-16",skiprows=4) # skiprows = 1; 첫 행부터 1개 행을 건너뛴 상태로 읽음
-csv_
 #    3  서태웅  북산고  187   40   60  70  75  80 Unnamed: 9
 # 0  4  강백호  북산고  188   15   20  10  35  10        NaN
 # 1  5  변덕규  능남고  202   80  100  95  85  80          C
@@ -179,7 +171,6 @@ csv_
 # 3  7  윤대협  능남고  190  100   85  90  95  95         C#
 
 csv_ = pandas.read_csv("csv_.csv",encoding="utf-16",skiprows=[1,5,7]) # skiprows = [1,3,5]; 해당 행을 지우고 읽음
-csv_
 #    Unnamed: 0   이름   학교    키   국어   영어  수학  과학  사회        SW특기
 # 0           1  정대만  북산고  184   40   35  50  55  25        Java
 # 1           2  송태섭  북산고  168   80   75  70  80  75  Javascript
@@ -188,7 +179,6 @@ csv_
 # 4           7  윤대협  능남고  190  100   85  90  95  95          C#
 
 csv_ = pandas.read_csv("csv_.csv",encoding="utf-16",skiprows=2, nrows=3) # nrows = 4; skiprows 이후 첫 행부터 4개 행을 읽음
-csv_
 # Unnamed: 0   이름   학교    키  국어  영어   수학  과학  사회        SW특기
 # 0           0  채치수  북산고  197  90  85  100  95  85      Python
 # 1           1  정대만  북산고  184  40  35   50  55  25        Java
@@ -197,7 +187,6 @@ csv_
 # excel 파일 저장 및 열기
 # df.to_excel("excel_.xlsx")
 # excel_ = pandas.read_excel("excel_.xlsx")
-# excel_
 #    Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 0           0  채치수  북산고  197   90   85  100  95  85      Python
 # 1           1  정대만  북산고  184   40   35   50  55  25        Java
@@ -211,7 +200,6 @@ csv_
 # txt 파일 저장 및 열기
 # df.to_csv("csv_.txt",encoding="utf-16")
 # text_ = pandas.read_csv("csv_.txt",encoding="utf-16",index_col=0) # index_col = HEADER; Header에 홰당하는 컬럼을 index로 사용
-# text_
 #     이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 0  채치수  북산고  197   90   85  100  95  85      Python
 # 1  정대만  북산고  184   40   35   50  55  25        Java
@@ -223,7 +211,6 @@ csv_
 # 7  윤대협  능남고  190  100   85   90  95  95          C#
 
 # text_.set_index("이름",inplace=True) # .set_index(HEADER, inplace=True); Header 지정
-# text_
 #       학교    키   국어   영어   수학  과학  사회        SW특기
 # 이름
 # 채치수  북산고  197   90   85  100  95  85      Python
@@ -308,7 +295,6 @@ csv_.values
 # .shapes; (row, column) 으로 표시
 csv_.shape
 # (8, 10)
-
 
 # Series 확인
 # .min(); 최소값
@@ -649,7 +635,6 @@ csv_["SW특기"] + csv_["학교"]
 # Column 추가
 # DataFrame[NewKey] = ~~~; 해당 식으로 계산하여 NewKey Column을 우측에 추가함
 csv_["새 컬럼"]=[1,2,3,4,5,6,7,8]
-csv_
 #    Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기  새 컬럼
 # 0           0  채치수  북산고  197   90   85  100  95  85      Python     1
 # 1           1  정대만  북산고  184   40   35   50  55  25        Java     2
@@ -662,7 +647,6 @@ csv_
 
 # .loc[DataFrame[Key1] > Value1, Key2] = Value2; Key1 Column의 값이 Value1보다 큰 Row를 가져온 후 Key2 Column에 Value2를 넣음
 csv_.loc[csv_["국어"]>=90, "수학"] = 200
-csv_
 #    Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기  새 컬럼
 # 0           0  채치수  북산고  197   90   85  200  95  85      Python     1
 # 1           1  정대만  북산고  184   40   35   50  55  25        Java     2
@@ -676,7 +660,6 @@ csv_
 # Row 추가
 # .loc[NewIndex] = ~~~; 해당 Index로 시작하는 Row를 하단에 추가함
 csv_.loc[8] = [8,"박진영","능남고",180,100,100,100,100,100,"python",9]
-csv_
 #    Unnamed: 0   이름   학교    키   국어   영어   수학   과학   사회        SW특기  새 컬럼
 # 0           0  채치수  북산고  197   90   85  200   95   85      Python     1
 # 1           1  정대만  북산고  184   40   35   50   55   25        Java     2
@@ -690,60 +673,288 @@ csv_
 
 # Column 삭제
 # .drop(columns=[Keylist]); Keylist에 해당하는 Column을 삭제
+csv_.drop(columns=["이름","국어"])
+#    Unnamed: 0   학교    키   영어   수학   과학   사회        SW특기  새 컬럼
+# 0           0  북산고  197   85  200   95   85      Python     1
+# 1           1  북산고  184   35   50   55   25        Java     2
+# 2           2  북산고  168   75   70   80   75  Javascript     3
+# 3           3  북산고  187   60   70   75   80         NaN     4
+# 4           4  북산고  188   20   10   35   10         NaN     5
+# 5           5  능남고  202  100   95   85   80           C     6
+# 6           6  능남고  188   65   45   40   35      PYTHON     7
+# 7           7  능남고  190   85  200   95   95          C#     8
+# 8           8  능남고  180  100  100  100  100      python     9
 
 # Row 삭제
 # .drop(index=[Keylist]); Keylist에 해당하는 Row를 삭제
+csv_.drop(index=[1,5,7])
+#    Unnamed: 0   이름   학교    키   국어   영어   수학   과학   사회        SW특기  새 컬럼
+# 0           0  채치수  북산고  197   90   85  200   95   85      Python     1
+# 2           2  송태섭  북산고  168   80   75   70   80   75  Javascript     3
+# 3           3  서태웅  북산고  187   40   60   70   75   80         NaN     4
+# 4           4  강백호  북산고  188   15   20   10   35   10         NaN     5
+# 6           6  황태산  능남고  188   55   65   45   40   35      PYTHON     7
+# 8           8  박진영  능남고  180  100  100  100  100  100      python     9
+
 # .drop(index=DataFrame[FILTER].index); FILTER에 해당하는 index를 확인하여 해당 row를 삭제
+FILTER = csv_["SW특기"].str.lower().isin(["python"])
+csv_.drop(index=csv_[FILTER].index)
+#    Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기  새 컬럼
+# 1           1  정대만  북산고  184   40   35   50  55  25        Java     2
+# 2           2  송태섭  북산고  168   80   75   70  80  75  Javascript     3
+# 3           3  서태웅  북산고  187   40   60   70  75  80         NaN     4
+# 4           4  강백호  북산고  188   15   20   10  35  10         NaN     5
+# 5           5  변덕규  능남고  202   80  100   95  85  80           C     6
+# 7           7  윤대협  능남고  190  100   85  200  95  95          C#     8
 
 # Cell 수정
 # .loc[Index, Key] = Value; index row의 Key Column에 해당하는 값을 Value로 업데이트
+csv_.loc[3,"SW특기"] = "What"
+#    Unnamed: 0   이름   학교    키   국어   영어   수학   과학   사회        SW특기  새 컬럼
+# 0           0  채치수  북산고  197   90   85  200   95   85      Python     1
+# 1           1  정대만  북산고  184   40   35   50   55   25        Java     2
+# 2           2  송태섭  북산고  168   80   75   70   80   75  Javascript     3
+# 3           3  서태웅  북산고  187   40   60   70   75   80        What     4
+# 4           4  강백호  북산고  188   15   20   10   35   10         NaN     5
+# 5           5  변덕규  능남고  202   80  100   95   85   80           C     6
+# 6           6  황태산  능남고  188   55   65   45   40   35      PYTHON     7
+# 7           7  윤대협  능남고  190  100   85  200   95   95          C#     8
+# 8           8  박진영  능남고  180  100  100  100  100  100      python     9
+
 # .loc[Index, [Key1, Key2]] = [Value1, Value2]; index row의 Key1 Column 값은 Value1로, Key2 Column 값은 Value2로 업데이트
+csv_.loc[3,["국어","영어","수학","과학","사회"]] = [100,100,100,100,100]
+#    Unnamed: 0   이름   학교    키   국어   영어   수학   과학   사회        SW특기  새 컬럼
+# 0           0  채치수  북산고  197   90   85  200   95   85      Python     1
+# 1           1  정대만  북산고  184   40   35   50   55   25        Java     2
+# 2           2  송태섭  북산고  168   80   75   70   80   75  Javascript     3
+# 3           3  서태웅  북산고  187  100  100  100  100  100        What     4
+# 4           4  강백호  북산고  188   15   20   10   35   10         NaN     5
+# 5           5  변덕규  능남고  202   80  100   95   85   80           C     6
+# 6           6  황태산  능남고  188   55   65   45   40   35      PYTHON     7
+# 7           7  윤대협  능남고  190  100   85  200   95   95          C#     8
+# 8           8  박진영  능남고  180  100  100  100  100  100      python     9
 
 # Column 위치 변경
 # Columns = list(DataFrame.columns); DataFrame의 Key 값들을 List 형태로 저장
 # DataFrame = DataFrame[[Columns[1]]+[Columns[-1]]+Columns[2:4]+.....]; Key값들을 재배열하여 List형태로 만든 뒤 다시 index로 지정
+Cols = list(csv_.columns)
+csv_ = csv_[[Cols[0]]+[Cols[1]]+[Cols[3]]+[Cols[2]]+Cols[4:-1]]
+#    Unnamed: 0   이름    키   학교   국어   영어   수학   과학   사회        SW특기
+# 0           0  채치수  197  북산고   90   85  200   95   85      Python
+# 1           1  정대만  184  북산고   40   35   50   55   25        Java
+# 2           2  송태섭  168  북산고   80   75   70   80   75  Javascript
+# 3           3  서태웅  187  북산고  100  100  100  100  100        What
+# 4           4  강백호  188  북산고   15   20   10   35   10         NaN
+# 5           5  변덕규  202  능남고   80  100   95   85   80           C
+# 6           6  황태산  188  능남고   55   65   45   40   35      PYTHON
+# 7           7  윤대협  190  능남고  100   85  200   95   95          C#
+# 8           8  박진영  180  능남고  100  100  100  100  100      python
 
 # Column 이름 변경
 # .columns = [Keys]; 새로운 Key list로 Column의 이름을 바꿈
+csv_.columns = ["No.", "Name", "Height", "School", "Korean", "English", "Math", "Science", "Social", "SW"]
+#    No. Name  Height School  Korean  English  Math  Science  Social          SW
+# 0    0  채치수     197    북산고      90       85   200       95      85      Python
+# 1    1  정대만     184    북산고      40       35    50       55      25        Java
+# 2    2  송태섭     168    북산고      80       75    70       80      75  Javascript
+# 3    3  서태웅     187    북산고     100      100   100      100     100        What
+# 4    4  강백호     188    북산고      15       20    10       35      10         NaN
+# 5    5  변덕규     202    능남고      80      100    95       85      80           C
+# 6    6  황태산     188    능남고      55       65    45       40      35      PYTHON
+# 7    7  윤대협     190    능남고     100       85   200       95      95          C#
+# 8    8  박진영     180    능남고     100      100   100      100     100      python
 
 
 # 13. 함수 적용; int 형에 str 데이터를 추가하는 등의 작업을 할 때
 
 # 데이터에 함수 적용(apply)
-# def add_cm(height): # 키 뒤에 cm를 추가하는 함수
-#     return str(height) + "cm"
-# DataFrame[Key] = DataFrame[Key].apply(add_cm); 선택된 Column에 해당 함수를 적용
+def add_cm(height): # 키 뒤에 cm를 추가하는 함수
+    return str(height) + " cm"
+csv_["Height"] = csv_["Height"].apply(add_cm) #; 선택된 Column에 해당 함수를 적용
+#    No. Name  Height School  Korean  English  Math  Science  Social          SW
+# 0    0  채치수  197 cm    북산고      90       85   200       95      85      Python
+# 1    1  정대만  184 cm    북산고      40       35    50       55      25        Java
+# 2    2  송태섭  168 cm    북산고      80       75    70       80      75  Javascript
+# 3    3  서태웅  187 cm    북산고     100      100   100      100     100        What
+# 4    4  강백호  188 cm    북산고      15       20    10       35      10         NaN
+# 5    5  변덕규  202 cm    능남고      80      100    95       85      80           C
+# 6    6  황태산  188 cm    능남고      55       65    45       40      35      PYTHON
+# 7    7  윤대협  190 cm    능남고     100       85   200       95      95          C#
+# 8    8  박진영  180 cm    능남고     100      100   100      100     100      python
 
-# def capitalize(lang):
-#     if pandas.notnull(lang): # 데이터 값이 null인지 확인하는 구문
-#         return lang.capitalize()
-#     return lang
-# DataFrame[Key] = DataFrame[Key].apply(capitalize)
-# DataFrame[Key].str.capitalize()
+def capitalize(lang):
+    if pandas.notnull(lang): # 데이터 값이 null인지 확인하는 구문
+        return lang.capitalize()
+    return lang
+csv_["SW"] = csv_["SW"].apply(capitalize) # csv_["SW"].str.capitalize()
+#    No. Name  Height School  Korean  English  Math  Science  Social          SW
+# 0    0  채치수  197 cm    북산고      90       85   200       95      85      Python
+# 1    1  정대만  184 cm    북산고      40       35    50       55      25        Java
+# 2    2  송태섭  168 cm    북산고      80       75    70       80      75  Javascript
+# 3    3  서태웅  187 cm    북산고     100      100   100      100     100        What
+# 4    4  강백호  188 cm    북산고      15       20    10       35      10         NaN
+# 5    5  변덕규  202 cm    능남고      80      100    95       85      80           C
+# 6    6  황태산  188 cm    능남고      55       65    45       40      35      Python
+# 7    7  윤대협  190 cm    능남고     100       85   200       95      95          C#
+# 8    8  박진영  180 cm    능남고     100      100   100      100     100      Python
 
 
 # 14. 그룹화; 동일한 값을 가진 데이터끼리 통계값을 산출하기 위해 사용
 
 # .groupby(Key); Key 값을 통해 묶음
+csv_.groupby("School")
+# <pandas.core.groupby.generic.DataFrameGroupBy object at 0x000002468B90FAC0>
+
 # .groupby(Key).get_gruop(Value); 묶인 데이터 중 Value 값을 가진 데이터를 가져옴
+csv_.groupby("School").get_group("북산고")
+#    No. Name  Height School  Korean  English  Math  Science  Social          SW
+# 0    0  채치수  197 cm    북산고      90       85   200       95      85      Python
+# 1    1  정대만  184 cm    북산고      40       35    50       55      25        Java
+# 2    2  송태섭  168 cm    북산고      80       75    70       80      75  Javascript
+# 3    3  서태웅  187 cm    북산고     100      100   100      100     100        What
+# 4    4  강백호  188 cm    북산고      15       20    10       35      10         NaN
+
 # .groupby(Key).mean(); 묶음마다 데이터의 평균을 가져옴
+csv_.groupby("School").mean()
+#         No.  Korean  English   Math  Science  Social
+# School
+# 능남고     6.5   83.75     87.5  110.0     80.0    77.5
+# 북산고     2.0   65.00     63.0   86.0     73.0    59.0
+
 # .groupby(Key).size(); 묶음마다 데이터의 사이즈를 가져옴
+csv_.groupby("School").size()
+# School
+# 능남고    4
+# 북산고    5
+# dtype: int64
+
 # .groupby(Key).size()[Value]; 묶인 데이터 중 Value 값을 가진 데이터의 사이즈를 가져옴
+csv_.groupby("School").size()["북산고"]
+# 5
+
 # .groupby(Key1)[Key2].mean(); 묶인 데이터 중 Key2의 평균을 가져옴
+csv_.groupby("School")["Korean"].mean()
+# School
+# 능남고    83.75
+# 북산고    65.00
+# Name: Korean, dtype: float64
+
 # .groupby(Key1)[[Key2,Key3,Key4]].mean(); 묶인 데이터 중 Key2, Key3, Key4의 평균을 가져옴
+csv_.groupby("School")[["Korean","English","Math"]].mean()
+#         Korean  English   Math
+# School
+# 능남고      83.75     87.5  110.0
+# 북산고      65.00     63.0   86.0
+
 # .groupby([Key1, Key2]); Key1로 묶음을 나눈 뒤, Key2로 다시 묶음
+csv_.groupby(["School","SW"])
+# <pandas.core.groupby.generic.DataFrameGroupBy object at 0x000002A6EAC1BEE0>
+
 # .groupby(Key1)[[Key2,Key3,Key4]].count(); 묶인 데이터 중 Key2, Key3, Key4의 데이터 개수를 가져옴. (NaN은 미포함)
+csv_.groupby("School")[["Korean","English","Math"]].count()
+#         Korean  English  Math
+# School
+# 능남고          4        4     4
+# 북산고          5        5     5
 
-# GroupData = DataFrame.groupby(Key1)
+GroupData = csv_.groupby("School")
+GroupData["SW"].value_counts()
+# School  SW
+# 능남고     Python        2
+#         C             1
+#         C#            1
+# 북산고     Java          1
+#         Javascript    1
+#         Python        1
+#         What          1
+# Name: SW, dtype: int64
+
 # GroupData[Key2].value_counts(); Key2의 데이터 개수를 Key1으로 그룹화하여 보여줌
-# GroupData[Key2].value_counts().loc[value]; Key1 중 value 값을 가지는 그룹에서 Key2의 데이터 개수를 보여줌
+GroupData["SW"].value_counts().loc["능남고"]
+# SW
+# Python    2
+# C         1
+# C#        1
+# Name: SW, dtype: int64
+
 # GroupData[Key2].value_counts(normalize=True).loc[value]; 위 데이터를 %로 전환하여 보여줌
+GroupData["SW"].value_counts(normalize=True).loc["능남고"]
+# SW
+# Python    0.50
+# C         0.25
+# C#        0.25
+# Name: SW, dtype: float64
 
-school = csv_.groupby("학교")
-# print(school["SW특기"].value_counts(normalize=True).loc["북산고"])
 
+# 15. Pandas Quiz
+data = {
+    '영화' : ['명량', '극한직업', '신과함께-죄와 벌', '국제시장', '괴물', '도둑들', '7번방의 선물', '암살'],
+    '개봉 연도' : [2014, 2019, 2017, 2014, 2006, 2012, 2013, 2015],
+    '관객 수' : [1761, 1626, 1441, 1426, 1301, 1298, 1281, 1270], # (단위 : 만 명)
+    '평점' : [8.88, 9.20, 8.73, 9.16, 8.62, 7.64, 8.83, 9.10]
+}
+df = pandas.DataFrame(data)
+#           영화  개봉 연도  관객 수    평점
+# 0         명량   2014  1761  8.88
+# 1       극한직업   2019  1626  9.20
+# 2  신과함께-죄와 벌   2017  1441  8.73
+# 3       국제시장   2014  1426  9.16
+# 4         괴물   2006  1301  8.62
+# 5        도둑들   2012  1298  7.64
+# 6    7번방의 선물   2013  1281  8.83
+# 7         암살   2015  1270  9.10
 
+# 15-1. 전체 데이터 중에서 "영화" 정보만 출력하시오.
+df["영화"]
+# 0           명량
+# 1         극한직업
+# 2    신과함께-죄와 벌
+# 3         국제시장
+# 4           괴물
+# 5          도둑들
+# 6      7번방의 선물
+# 7           암살
+# Name: 영화, dtype: object
 
+# 15-2. 전체 데이터 중에서 "영화", "평점" 정보를 출력하시오.
+df[["영화","평점"]]
+#           영화    평점
+# 0         명량  8.88
+# 1       극한직업  9.20
+# 2  신과함께-죄와 벌  8.73
+# 3       국제시장  9.16
+# 4         괴물  8.62
+# 5        도둑들  7.64
+# 6    7번방의 선물  8.83
+# 7         암살  9.10
 
+# 15-3. 2015년 이후에 개봉한 영화 데이터 중에서 "영화", "개봉 연도" 정보를 출력하시오.
+df[df["개봉 연도"]>=2015][["영화","개봉 연도"]]
+#           영화  개봉 연도
+# 1       극한직업   2019
+# 2  신과함께-죄와 벌   2017
+# 7         암살   2015
 
+# 15-4. 주어진 계산식을 참고하여 "추천 점수" Column을 추가하시오.
+df["추천 점수"] = round(df["관객 수"] * df["평점"] / 100,0)
+#           영화  개봉 연도  관객 수    평점  추천 점수
+# 0         명량   2014  1761  8.88  156.0
+# 1       극한직업   2019  1626  9.20  150.0
+# 2  신과함께-죄와 벌   2017  1441  8.73  126.0
+# 3       국제시장   2014  1426  9.16  131.0
+# 4         괴물   2006  1301  8.62  112.0
+# 5        도둑들   2012  1298  7.64   99.0
+# 6    7번방의 선물   2013  1281  8.83  113.0
+# 7         암살   2015  1270  9.10  116.0
 
+# 15-5. 전체 데이터를 "개봉 연도" 기준 내림차순으로 출력하시오.
+df.sort_values("개봉 연도",ascending=False)
+#           영화  개봉 연도  관객 수    평점  추천 점수
+# 1       극한직업   2019  1626  9.20  150.0
+# 2  신과함께-죄와 벌   2017  1441  8.73  126.0
+# 7         암살   2015  1270  9.10  116.0
+# 0         명량   2014  1761  8.88  156.0
+# 3       국제시장   2014  1426  9.16  131.0
+# 6    7번방의 선물   2013  1281  8.83  113.0
+# 5        도둑들   2012  1298  7.64   99.0
+# 4         괴물   2006  1301  8.62  112.0
