@@ -195,9 +195,9 @@ csv_
 # 2           2  송태섭  북산고  168  80  75   70  80  75  Javascript
 
 # excel 파일 저장 및 열기
-df.to_excel("excel_.xlsx")
-excel_ = pandas.read_excel("excel_.xlsx")
-excel_
+# df.to_excel("excel_.xlsx")
+# excel_ = pandas.read_excel("excel_.xlsx")
+# excel_
 #    Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 0           0  채치수  북산고  197   90   85  100  95  85      Python
 # 1           1  정대만  북산고  184   40   35   50  55  25        Java
@@ -209,9 +209,9 @@ excel_
 # 7           7  윤대협  능남고  190  100   85   90  95  95          C#
 
 # txt 파일 저장 및 열기
-df.to_csv("csv_.txt",encoding="utf-16")
-text_ = pandas.read_csv("csv_.txt",encoding="utf-16",index_col=0) # index_col = HEADER; Header에 홰당하는 컬럼을 index로 사용
-text_
+# df.to_csv("csv_.txt",encoding="utf-16")
+# text_ = pandas.read_csv("csv_.txt",encoding="utf-16",index_col=0) # index_col = HEADER; Header에 홰당하는 컬럼을 index로 사용
+# text_
 #     이름   학교    키   국어   영어   수학  과학  사회        SW특기
 # 0  채치수  북산고  197   90   85  100  95  85      Python
 # 1  정대만  북산고  184   40   35   50  55  25        Java
@@ -222,8 +222,8 @@ text_
 # 6  황태산  능남고  188   55   65   45  40  35      PYTHON
 # 7  윤대협  능남고  190  100   85   90  95  95          C#
 
-text_.set_index("이름",inplace=True) # .set_index(HEADER, inplace=True); Header 지정
-text_
+# text_.set_index("이름",inplace=True) # .set_index(HEADER, inplace=True); Header 지정
+# text_
 #       학교    키   국어   영어   수학  과학  사회        SW특기
 # 이름
 # 채치수  북산고  197   90   85  100  95  85      Python
