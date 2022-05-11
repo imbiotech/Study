@@ -597,7 +597,7 @@
 # # NSN=[sn(i) for i in range(1,10001)]
 # # SN=[i for i in range(1,10001) if i not in NSN]
 # for i in SNL:
-    print(i)
+#     print(i)
 
 
 # # Class & Instance
