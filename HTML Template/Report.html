@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Job Search
+        </title>
+        <style>
+            section {
+                display:grid;
+                gap:20px;
+                grid-template-columns: repeat(4, 1fr);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Serach Results
+        </h1>
+        <h3> <!-- 변수는 다음과 같이 지정하여 입력 -->
+            Found {{ResultsNumber}} results for searching by {{text}}
+        </h3>
+        <h3>
+            {{SerchingCount}} times of searching done by {{text}}
+        </h3>
+        <a href="/export?text={{text}}">
+            Export CSV
+        </a>
+        <section>
+            <h4>
+                Title
+            </h4>
+            <h4>
+                Company
+            </h4>
+            <h4>
+                Location
+            </h4>
+            <h4>
+                Link
+            </h4>
+            <!-- 파이썬 함수는 다음과 같이 지정하여 입력 -->
+            {% for job in jobs %}
+                <span>
+                    {{job.title}}
+                </span>
+                <span>
+                    {{job.company}}
+                </span>
+                <span>
+                    {{job.location}}
+                </span>
+                <a href="https://www.naver.com" target="_blank">
+                    Apply
+                </a>
+            {% endfor %}
+        </section>
+    </body>
+</html>

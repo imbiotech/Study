@@ -1,10 +1,6 @@
 import pandas
 import csv
 
-# updateasdfsadfafsdaf asdf a sd
-print("asdasdasdasdasdsd")
-# adasdfasdf
-
 
 # Pandas = 파이썬에서 사용하는 데이터 분석 라이브러리
 
