@@ -13,10 +13,10 @@ y = [2, 4, 8]
 # plt.title("Line graph")
 
 # 한글 폰트 설정
-# matplotlib.rcParams["font.family"] = "Malgun Gothic" # 한글 폰트 지정
-# matplotlib.rcParams["font.size"] = 15 # 글자 크기 설정
-# matplotlib.rcParams["axes.unicode_minus"] = False # 한글 폰트 사용 시 마이너스가 깨지는 현상 방지
-# plt.title("꺾은선 그래프", fontdict={"family":"HYGungSo-Bold","size":20}) # 개별 폰트 설정
+matplotlib.rcParams["font.family"] = "Malgun Gothic" # 한글 폰트 지정
+matplotlib.rcParams["font.size"] = 15 # 글자 크기 설정
+matplotlib.rcParams["axes.unicode_minus"] = False # 한글 폰트 사용 시 마이너스가 깨지는 현상 방지
+# plt.title("꺾은선 그래프", fontdict={"family":"HYGungSo-Bold","size":20}); 타이틀을 설정하고 타이틀에 대한 폰트 설정을 적용
 
 # plt.plot([-1, 0, 1],[-5, -1, 2])
 
@@ -87,15 +87,70 @@ y = [2, 4, 8]
 # plt.plot(x, y, marker="o", mfc="red", ms="10", mec="blue", ls="--")
 
 # 배경색
-plt.figure(facecolor="grey")
-plt.plot(x, y)
+# plt.figure(facecolor="grey")
+# plt.plot(x, y)
 
 
+# 5. 파일 저장
+# plt.plot(x, y)
+# plt.savefig("graph_dpi200.png", dpi=200); dpi를 설정해서 해상도를 높일 수 있음
 
 
+# 6. 텍스트
+# plt.plot(x, y, "o-")
+# for index, txt in enumerate(y): # index = 0, 1, 2 // txt = 2, 4, 8
+#     plt.text(x[index], y[index] + 0.3, txt, ha="center", color="blue") # 해당하는 좌표(x[index], y[index])에 txt를 표시해줌, + 0.3은 높이 조절, ha='center는 가운데 정렬
 
 
+# 7. 여러 데이터
+
+# COVID-19 백신 종류별 접종 인구
+# days = [1, 2, 3]
+# AZ = [2, 4, 8]
+# PF = [5, 1, 3]
+# MD = [1, 2, 5]
+#
+# plt.plot(days, AZ, "o-", label="AZ")
+# plt.plot(days, PF, "s--", label="PF")
+# plt.plot(days, MD, "x-.", label="MD")
+#
+# plt.legend(ncol = 3); 3개 column 만큼의 legend 표시 가능
+
+
+# 8. 막대 그래프 (기본)
+
+# labels = ["강백호", "서태웅", "정대만"]
+# values = [190, 187, 184]
+# colors = ["r", "g", "b"]
+
+# plt.bar(labels, values, color="g"); 색 설정
+# plt.bar(labels, values, color=colors, alpha=0.8); 색을 지정된 list로 가져옴, alpha로 투명도 설정
+# plt.ylim(180.0, 195.0); y값의 최대~최소 지정
+# plt.bar(labels, values, width=0.5); 막대의 폭 감소
+# plt.bar(labels, values, width=0.3)
+# plt.xticks(rotation=45); x축의 눈금 지표를 45도 돌림
+# plt.yticks(rotation=45); y축의 눈금 지표를 45도 돌림
+
+# ticks = ["1번 학생", "2번 학생", "3번 학생"]
+# plt.bar(labels, values)
+# plt.xticks(labels, ticks); x축 눈금을 지정된 list로 대체함
+
+
+# 9. 막대 그래프 (심화)
+
+labels = ["강백호", "서태웅", "정대만"]
+values = [190, 187, 184]
+# bar = plt.barh(labels, values)
+# plt.xlim(180, 195)
+# bar[0].set_hatch("/"); 사선 패턴
+# bar[1].set_hatch("x"); 교차선 패턴
+# bar[2].set_hatch(".."); 점 패턴
+# 더 다양한 패턴은 Hatch style reference 참고
+
+# bar = plt.bar(labels, values)
+# plt.ylim(180, 195)
+# for index, rect in enumerate(bar):
+#     plt.text(index, rect.get_height()+0.3, values[index], ha="center")
 
 
 plt.show()
-#
