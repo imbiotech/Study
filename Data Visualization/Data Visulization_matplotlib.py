@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
+import pandas as pd
 
 # matplotlib; 다양한 형태의 그래프를 통해서 데이터 시각화를 할 수 있는 라이브러리
 
@@ -151,6 +152,47 @@ values = [190, 187, 184]
 # plt.ylim(180, 195)
 # for index, rect in enumerate(bar):
 #     plt.text(index, rect.get_height()+0.3, values[index], ha="center")
+
+
+# 10. 데이터 프레임 활용
+
+df = pd.read_csv("csv_.csv",encoding="utf-16")
+df["지원번호"] = ["1번", "2번", "3번", "4번", "5번", "6번", "7번", "8번"]
+df.set_index("지원번호",inplace=True)
+#       Unnamed: 0   이름   학교    키   국어   영어   수학  과학  사회        SW특기
+# 지원번호
+# 1번             0  채치수  북산고  197   90   85  100  95  85      Python
+# 2번             1  정대만  북산고  184   40   35   50  55  25        Java
+# 3번             2  송태섭  북산고  168   80   75   70  80  75  Javascript
+# 4번             3  서태웅  북산고  187   40   60   70  75  80         NaN
+# 5번             4  강백호  북산고  188   15   20   10  35  10         NaN
+# 6번             5  변덕규  능남고  202   80  100   95  85  80           C
+# 7번             6  황태산  능남고  188   55   65   45  40  35      PYTHON
+# 8번             7  윤대협  능남고  190  100   85   90  95  95          C#
+
+# plt.plot(df.index, df["키"]); index를 x 데이터로, ["키"]를 y 데이터로
+# plt.plot(df.index, df["영어"])
+# plt.plot(df.index, df["수학"])
+
+# plt.grid(axis="y", color="purple", alpha=0.2, linestyle="--", linewidth="2") # 데이터에 grid 추가, axis="x" x에만 추가
+
+
+# 11. 누적 막대 그래프
+
+# 아래와 같이 쓸 경우 데이터가 구분되지 않아 알아보기 어려움
+# plt.bar(df["이름"], df["국어"])
+# plt.bar(df["이름"], df["영어"])
+
+# plt.bar(df["이름"], df["국어"], label="국어")
+# plt.bar(df["이름"], df["영어"], bottom=df["국어"], label="영어") # 국어 데이터 위에 영어 데이터를 쌓음 (국어를 출력하지 않으면 빈칸으로 표시 됨)
+# plt.bar(df["이름"], df["수학"], bottom=df["영어"]+df["국어"], label="수학")
+
+# plt.xticks(rotation=60)
+# plt.legend(ncol = 3)
+
+
+# 12. 다중 막대 그래프
+
 
 
 plt.show()
