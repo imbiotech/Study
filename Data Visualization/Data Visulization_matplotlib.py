@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib
 import pandas as pd
+import numpy as np
 
 # matplotlib; 다양한 형태의 그래프를 통해서 데이터 시각화를 할 수 있는 라이브러리
 
@@ -193,6 +194,33 @@ df.set_index("지원번호",inplace=True)
 
 # 12. 다중 막대 그래프
 
+# arr = np.arange(5); numpy arange는 배열 형태로 자료가 저장되고
+# print(arr+100); 덧셈이나
+# print(arr*3); 곱셈을 단순 연산으로 출력할 수 있음.
+# arr = arr*3
+# print(arr)
+
+# index = np.arange(df.shape[0]); index 부여
+# plt.figure(figsize=(10,7))
+# plt.bar(index - 0.25, df["국어"], width=0.25, label="국어"); 각 index와 width를 이용하여 각 데이터의 위치 및 크기 조절
+# plt.bar(index, df["영어"], width=0.25, label="영어")
+# plt.bar(index + 0.25, df["수학"], width=0.25, label="수학")
+# plt.legend(ncol=3)
+# plt.xticks(index, df["이름"], rotation=45); xticks로 index에 데이터를 직접 넣을 수 있음
+
+
+# 13. 원 그래프 (기본)
+
+values = [30, 25, 20, 13, 10, 2]
+labels = ["Python", "Java", "Javascript", "C#", "C/C++", "ETC"]
+# (값, labels=라벨링, autopct=표시형식(%.1f는 소수점만, %%는 % 표시), startangle=시작 지점(90이 12시 방향), counterclock=회전방향)
+# plt.pie(values, labels=labels, autopct="%.1f%%", startangle=90, counterclock=False)
+
+# explode = [0.2, 0.1, 0, 0, 0, 0]; 원점으로부터 간격을 살짝 벌려줌
+explode = [0.05] * len(values)# [간격 지정] * 데이터 개수로 일괄 지정 가능
+plt.pie(values, labels=labels, explode=explode)
+# plt.legend(); pie chart 는 그냥 출력하면 데이터가 겹쳐서 잘 보이지 않음
+plt.legend(loc=(1.2, 0.3), title="언어별 선호도")
 
 
 plt.show()
