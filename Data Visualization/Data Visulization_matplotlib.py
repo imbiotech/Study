@@ -211,16 +211,52 @@ df.set_index("지원번호",inplace=True)
 
 # 13. 원 그래프 (기본)
 
-values = [30, 25, 20, 13, 10, 2]
-labels = ["Python", "Java", "Javascript", "C#", "C/C++", "ETC"]
+# values = [30, 25, 20, 13, 10, 2]
+# labels = ["Python", "Java", "Javascript", "C#", "C/C++", "ETC"]
 # (값, labels=라벨링, autopct=표시형식(%.1f는 소수점만, %%는 % 표시), startangle=시작 지점(90이 12시 방향), counterclock=회전방향)
 # plt.pie(values, labels=labels, autopct="%.1f%%", startangle=90, counterclock=False)
 
 # explode = [0.2, 0.1, 0, 0, 0, 0]; 원점으로부터 간격을 살짝 벌려줌
-explode = [0.05] * len(values)# [간격 지정] * 데이터 개수로 일괄 지정 가능
-plt.pie(values, labels=labels, explode=explode)
+# explode = [0.05] * len(values)# [간격 지정] * 데이터 개수로 일괄 지정 가능
+# plt.pie(values, labels=labels, explode=explode)
 # plt.legend(); pie chart 는 그냥 출력하면 데이터가 겹쳐서 잘 보이지 않음
-plt.legend(loc=(1.2, 0.3), title="언어별 선호도")
+# plt.legend(loc=(1.2, 0.3), title="언어별 선호도")
 
+
+# 14. 원 그래프 (심화)
+
+# colors = ["#ffadad","#ffd6a5","#fdffb6","#caffbf","#9bf6ff","#a0c4ff"]
+# explode = [0.05] * 6
+# plt.pie(values, labels=labels, autopct="%.1f%%", startangle=90, counterclock=False,colors=colors, explode=explode)
+
+# wedgeprops = {"width":0.5, "edgecolor":"w", "linewidth":3}; 도넛 모양의 그래프를 만들 수 있음. width=도넛의 두께, edgecolor=도넛 테두리 색, linewidth=도넛 테두리 굵기
+# plt.pie(values, labels=labels, autopct="%.1f%%", startangle=90, counterclock=False,colors=colors, wedgeprops=wedgeprops)
+
+# def custom_autopct(pct): # autopct에 대한 custom 함수를 만들어서 표시 형식에 사용할 수 있음. 지정된 함수는 10% 이상의 데이터만 출력하는 함수
+#     return ("%.1f%%" % pct) if pct >= 10 else ""
+# plt.pie(values, labels=labels, autopct=custom_autopct, startangle=90, counterclock=False,colors=colors, pctdistance=0.7) #pctdistance=라벨 표시 위치 변경
+
+# DataFrame으로 pie chart 만들기
+# group = df.groupby("학교")
+# values = [group.size()["북산고"],group.size()["능남고"]]
+# labels = ["북산고", "능남고"]
+# plt.pie(values,labels=labels)
+# plt.title("소속 학교")
+
+
+# 15. 산점도 그래프
+
+# df["학년"] = [3, 3, 2, 1, 1, 3, 2, 2]
+# plt.scatter(df["영어"], df["수학"])
+# plt.xlabel("영어 점수")
+# plt.ylabel("수학 점수")
+
+# plt.figure(figsize=(7,7))
+# df["학년"] = [3, 3, 2, 1, 1, 3, 2, 2]
+# sizes = df["학년"] * 500 # 1학년 = 500 / 2학년 = 1000 / 3학년 1500
+# plt.scatter(df["영어"], df["수학"], s=sizes, c=df["학년"], cmap="viridis", alpha=0.5) # s=사이즈 지정, c=색을 분류할 대상 지정, cmap=색 지정(matplotlib.cmap 참고)
+# plt.xlabel("영어 점수")
+# plt.ylabel("수학 점수")
+# plt.colorbar(ticks=[1,2,3],label="학년",shrink=0.5, orientation="horizontal")
 
 plt.show()
