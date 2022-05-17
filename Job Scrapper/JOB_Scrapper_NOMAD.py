@@ -52,3 +52,43 @@ def export():
 
 
 app.run()
+
+
+
+# Instanciation
+class car():
+
+    def __init__(self, *arg, **kwargs):
+        self.wheels = 4
+        self.doors = 4
+        self.windows = 4
+        self.seats = 4
+        self.color = kwargs.get("color", "black")
+        self.price = kwargs.get("price", "$20")
+
+    def __str__(self):
+        return f"Car with {self.wheels} wheels"
+
+# inherit or extend 부모의 성격을 상속
+class convertible(car):
+
+    def take_off(self):
+        return "taking off"
+
+    # 부모의 method를 덮어쓰기 할 수 있음
+    def __str__(self):
+        return f"Car with no roof"
+
+    # super()를 통해서 덮어쓴 부모의 method를 다시 호출할 수 있음
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.time = kwargs.get("time", 10)
+
+# function
+def start_function():
+    print("I started.")
+
+porche = convertible(color="green",price="$40",)
+mini = car()
+
+print(porche.color)
