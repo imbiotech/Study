@@ -11,6 +11,7 @@ print(dic)
 print(dic["tup"])
 
 
+######################################################################################################################
 # 2일차 퀴즈 관련
 
 # This Blueprint code is broken. There are some functions missing, you need to create them. When you run the code, the output must look like this!
@@ -60,6 +61,7 @@ print(days)
 # /\/\/\/\/\/\/\ END DO NOT TOUCH AREA /\/\/\/\/\/\/\ #
 
 
+######################################################################################################################
 # 3 일차
 
 dictionary = {}
@@ -216,3 +218,63 @@ print('\nget_from_dict(my_english_dict, "kimchi"):')
 get_from_dict(my_english_dict, "kimchi")
 
 # \/\/\/\/\/\/\ END DO NOT TOUCH  \/\/\/\/\/\/\
+
+
+######################################################################################################################
+# 4일차
+
+import os
+import requests
+
+# Using the boilerplate, make a program that gets urls as an input and checks if they are online or not.
+# 보일러플레이트를 이용해 URL을 입력받아 온라인 상태인지 아닌지 체크하는 프로그램을 만드세요.
+# 프로그램은 쉼표로 URL의 개수를 구별합니다. 또한 ‘http’의 유무와 공백을 체크하여 ‘http’가 없다면 추가해주고 공백은 모두 제거해 줍니다. 대문자가 포함되어 있을 경우도 생각하여 소문자로 변환시켜줍니다. 이러한 경우들을 모두 생각하여 처리해줍시다.
+# URL이 실제로 존재하는지 존재하지 않는지 체크해야 됩니다.
+# 사용자들은 프로그램이 모두 종료된 후 다시 시작할 수 있습니다.
+
+def redo(string):
+  if string == "y":
+    os.system("clear")
+    return 1
+  elif string == "n":
+    return 2
+  else:
+    print("That's not a valid answer")
+    return redo(input("Do you want to start over? y/n"))
+
+def make_urls(list):
+  list_rev=[]
+  for i in list:
+    i=i.replace(" ","").lower()
+    # i=i.strip().lower()
+    if "http://" not in i:
+      i="http://"+i
+    list_rev.append(i)
+  return list_rev
+
+while True:
+  print(f"""Welcome to IsItDown.py!
+Please write a URL or URLs you want to check. (separated by comma)""")
+  urls=list(map(str,input().split(",")))
+  urls=make_urls(urls)
+  for i in urls:
+    try:
+      req = requests.get(i)
+      # 1xx - informational
+      # 2xx - success
+      # 3xx - redirection
+      # 4xx - client error
+      # 5xx - server error
+      if 200<=req.status_code<300:
+        print(f"{i} is up!")
+    except:
+      if ".com" not in i and "co.kr" not in i:
+        print(f"{i} is not a valid URL.")
+      else:
+        print(f"{i} is down!")
+  call = redo(input("Do you want to start over? y/n"))
+  if call == 1:
+    continue
+  else:
+    break
+print("k. bye!")
