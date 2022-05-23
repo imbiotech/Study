@@ -1,9 +1,9 @@
 from binance.client import Client
-import APIData, time
-
+import time
+from APIData import APIkey, APIsecert
 import binance.enums
 
-client = Client(APIData.APIkey,APIData.APIsecert)
+client = Client(APIkey,APIsecert)
 print("logged in!\n")
 
 servertime = client.get_server_time()["serverTime"]

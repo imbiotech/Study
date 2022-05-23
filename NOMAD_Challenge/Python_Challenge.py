@@ -1,4 +1,5 @@
 # 1일차 퀴즈 관련
+import time
 
 myNameIs = "nico"
 print(myNameIs)
@@ -63,6 +64,7 @@ print(days)
 
 ######################################################################################################################
 # 3 일차
+# 답안: https://gist.github.com/serranoarevalo/a830deafa1dc133b8f4e6ee19e56d0be
 
 dictionary = {}
 dictionary["a"] = "A"
@@ -222,6 +224,7 @@ get_from_dict(my_english_dict, "kimchi")
 
 ######################################################################################################################
 # 4일차
+# 답안: https://gist.github.com/serranoarevalo/8608a7e39af7f634f11184756c2463f5
 
 import os
 import requests
@@ -278,3 +281,115 @@ Please write a URL or URLs you want to check. (separated by comma)""")
   else:
     break
 print("k. bye!")
+
+
+######################################################################################################################
+# 5일차
+
+import os
+import csv
+import requests
+from bs4 import BeautifulSoup
+
+os.system("clear")
+alba_url = "http://www.alba.co.kr"
+
+# goodbox에서 각 브랜드 링크 확인
+get_url = requests.get(alba_url)
+soup = BeautifulSoup(get_url.text, "html.parser")
+get_goodsbox = soup.find_all("li", {"class": "impact"})
+
+for i in get_goodsbox:
+  company = i.find("span", {"class": "company"}).text
+  href = i.find("a")["href"]
+
+  # 받아온 브랜드 링크(href)에서 알바 정보 확인
+  h_get_url = requests.get(href)
+  h_soup = BeautifulSoup(h_get_url.text, "html.parser")
+
+  # goodslist에서 알바 정보 확인
+  get_goodslist = h_soup.find_all("tr",{"class": "divide"})
+  alba_dict={}
+  alba_list=[]
+  for i in get_goodslist:
+    # i.find("td", {"class": "local first"}.text = 알바 지역
+    place = i.find("td", {"class": "local first"}).text
+    # i.find("td", {"class": "company"}.text = 알바 회사명
+    title = i.find("span", {"class": "company"}).text
+    # i.find("td", {"class": "data"}).text = 알바 시간
+    time = i.find("td", {"class": "data"}).text
+    # i.find("td", {"class": "pay"}).text = 급여
+    pay = i.find("td", {"class": "pay"}).text
+    # i.find("td", {"class": "regDate last"}).text = 등록일
+    date = i.find("td", {"class": "regDate last"}).text
+    alba_dict = {
+      "place": place.replace("\xa0"," "), # 이상한 문자열 삭제
+      "title": title,
+      "time": time,
+      "pay": pay,
+      "date": date
+    }
+    alba_list.append(alba_dict)
+
+  file = open(f"{company.replace('/','_')}.csv", "w") # 회사 이름에 / 가 있으면 파일 이름으로 넣을 수 없음
+  writer = csv.writer(file)
+  writer.writerow(["place", "title", "time", "pay", "date"])
+  for alba in alba_list:
+    # Dict 형에서 List 형으로 전환할 때 key만 가져오고 싶으면 Dict.keys() value만 가져오고 싶으면 Dict.values()
+    writer.writerow(list(alba.values()))
+
+# goodsBox
+# <li class="impact">
+#   <div class="B_MyAd_"></div>
+#   <a class="goodsBox-info" href="http://yoogane.alba.co.kr/">
+#     <span class="logo">
+#       <img alt="유가네닭갈비" src="//image-logo.alba.kr/data_image2/logo/brand/20210315122240299.gif"/>
+#     </span>
+#     <span class="company">유가네닭갈비</span>
+#     <span class="title">
+#       <span>매장 아르바이트/직원 채용</span>
+#     </span>
+#     <span class="wrap">
+#       <span class="local">전국</span>
+#       <span class="pay">
+#         <span class="payLetter">공고별 확인</span>
+#         <span class="payIcon talk"></span>
+#       </span>
+#     </span>
+#   </a>
+# </li>
+# goodslist
+# <tr class="divide">
+#   <td class="local first" scope="row">
+#     <div class="L_MyAd_"></div>
+#     경기 안성시
+#   </td>
+#   <td class="title">
+#     <a class="" href="/job/Detail.asp?adid=113909141&amp;areacd=&amp;workaddr1=&amp;workaddr2=&amp;jobkind=&amp;jobkindsub=&amp;jobkindmulti=&amp;gendercd=&amp;agelimitcd=&amp;agelimit=0&amp;worktime=&amp;weekdays=&amp;searchterm=&amp;paycd=&amp;paystart=&amp;payend=&amp;workperiodcd=&amp;workstartdt=&amp;workenddt=&amp;workchkyn=&amp;workweekcd=&amp;targetcd=&amp;streetunicd=&amp;streetstationcd=&amp;unicd=&amp;schnm=&amp;schtext=&amp;orderby=freeorder&amp;acceptmethod=&amp;eleccontract=&amp;careercd= &amp;lastschoolcd=&amp;welfarecd=&amp;careercdunrelated=&amp;lastschoolcdunrelated=&amp;strAreaMulti=&amp;genderunrelated=&amp;special=&amp;hiretypecd=&amp;totalCount=165&amp;listmenucd=BRANDSITE">
+#       <span class="company"> 플레이타임그룹 스타필드 안성점 상상스</span>
+#       <span class="title">스타필드 안성점 상상스케치(어린이 만들기카페) 평일/주말 아르바이트 모집</span>
+#     </a>
+#     <span class="funcBtn">
+#       <a class="applBtn scrap" href="javascript:void(0);" id="joblistscrapgen113909141" onclick="if( confirm('개인회원으로 로그인 후 이용 가능한 서비스입니다.\n지금 로그인 하시겠습니까?') ) { loginPerson('/job/brand/main.asp', ''); }">
+#         스크랩
+#       </a>
+#       <a class="applBtn thumbView" href="#" id="JobFreeListTd113909141" onclick="JobPreview.PREVIEW('JobFreeList','113909141',''); return false;">
+#         요약보기
+#       </a>
+#       <a class="applBtn blankView" href="/job/Detail.asp?adid=113909141&amp;areacd=&amp;workaddr1=&amp;workaddr2=&amp;jobkind=&amp;jobkindsub=&amp;jobkindmulti=&amp;gendercd=&amp;agelimitcd=&amp;agelimit=0&amp;worktime=&amp;weekdays=&amp;searchterm=&amp;paycd=&amp;paystart=&amp;payend=&amp;workperiodcd=&amp;workstartdt=&amp;workenddt=&amp;workchkyn=&amp;workweekcd=&amp;targetcd=&amp;streetunicd=&amp;streetstationcd=&amp;unicd=&amp;schnm=&amp;schtext=&amp;orderby=freeorder&amp;acceptmethod=&amp;eleccontract=&amp;careercd= &amp;lastschoolcd=&amp;welfarecd=&amp;careercdunrelated=&amp;lastschoolcdunrelated=&amp;strAreaMulti=&amp;genderunrelated=&amp;special=&amp;hiretypecd=&amp;totalCount=165&amp;listmenucd=BRANDSITE" target="_blank">
+#         새창보기
+#       </a>
+#     </span>
+#   </td>
+#   <td class="data">
+#     <span class="consult">시간협의</span>
+#   </td>
+#   <td class="pay">
+#     <span class="payIcon hour">시급</span>
+#   <br/>
+#     <span class="number">9,660</span>
+#   </td>
+#   <td class="regDate last">
+#     <strong>1시간전</strong>
+#   </td>
+# </tr>

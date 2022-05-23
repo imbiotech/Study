@@ -57,8 +57,10 @@ app.run()
 
 # Instanciation
 class car():
+    if __name__ == "__main__": # class 만든 곳에서 불러 오면 실행됨
+        print("Call main")
 
-    def __init__(self, *arg, **kwargs):
+    def __init__(self, *arg, **kwargs): # class 생성 시 즉시 실행되는 구문
         self.wheels = 4
         self.doors = 4
         self.windows = 4
@@ -69,7 +71,7 @@ class car():
     def __str__(self):
         return f"Car with {self.wheels} wheels"
 
-# inherit or extend 부모의 성격을 상속
+# inherit or extend 부모의 성격을 상속, 기존 클래스가 라이브러리 형태로 제공되거나 수정이 허용되지 않는 상황이라면 상속을 사용
 class convertible(car):
 
     def take_off(self):
@@ -84,11 +86,15 @@ class convertible(car):
         super().__init__(**kwargs)
         self.time = kwargs.get("time", 10)
 
-# function
-def start_function():
-    print("I started.")
+mini = car() # mini는 car class의 내용을 받아옴, __init__을 기본 실행
+print(mini) # __str__의 내용을 출력함
+
 
 porche = convertible(color="green",price="$40",)
-mini = car()
+
 
 print(porche.color)
+
+
+# mod1.add, mod1.sub처럼 쓰지 않고 add, sub처럼 모듈 이름 없이 함수 이름만 쓰고 싶은 경우 "from 모듈 이름 import 모듈 함수"를 사용
+# from MODULE import * 하면 모든 함수를 불러옴

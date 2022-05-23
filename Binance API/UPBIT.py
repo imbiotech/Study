@@ -1,11 +1,47 @@
 import time
-import APIData
+from APIData import APIkey_U, APIsecert_U
 import pandas as pd
 import pyupbit
 from pyupbit import WebSocketManager
+import requests
+import sys
+from PyQt5.QtWidgets import * # window를 설정하는 module
+from PyQt5.QtGui import *
+
+class custom_window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        #1920*1080
+        size = 600
+        self.setGeometry(int(960-size/2),int(540-size/2),size,size)
+        self.setWindowTitle("custom_window")
+        # self.setWindowIcon(QIcon("appIcon.png"))
+        BTC_label = QLabel("BTC Price:", self) # 줄글 생성
+        self.BTC_lineEdit = QLineEdit(self)
+        self.BTC_lineEdit.move(80,0)
+        BTC_Button = QPushButton("Check Price", self) # 버튼 생성
+        BTC_Button.move(200,0)
+        BTC_Button.clicked.connect(self.check_price)
+
+    def check_price(self):
+        price = 1111
+        self.BTC_lineEdit.setText(str(price))
+
+
+app = QApplication(sys.argv) # QApplication의 instance 지정; app
+c_window = custom_window()
+c_window.show()
+app.exec_() # exec_ method 호출, 이벤트 루프를 형성하여 window 출력 후 종료 시까지 프로그램이 계속 실행 상태 유지
+
+
+
+
+
+
 
 # 캔들 데이터 덥데이트 및 적용 함수
 def get_candle_data(markets, string, count):
+    # ticker=검색할 마켓, interval=단위지정, count=봉 개수
     df = pyupbit.get_ohlcv(ticker=markets, interval=string, count=count)
     new_df = pd.DataFrame(columns=df.columns)
 
@@ -34,91 +70,21 @@ def get_candle_data(markets, string, count):
     return ma5>ma20
 
 # pyupbit 로그인
-pyup = pyupbit.Upbit(access=APIData.APIkey_U,secret=APIData.APIsecert_U)
+pyup = pyupbit.Upbit(access=APIkey_U,secret=APIsecert_U)
 
 # 지갑 확인
 wallets = pyupbit.Upbit.get_balances(pyup)
-# for i in wallets:
-#     print(i)
 
-# 캔들 데이터
-# ticker=검색할 마켓, interval=단위지정, count=봉 개수, to=None):
+# 거래 대상 지정
 MARKET="KRW-JST"
+
+# 캔들 정보 지정
 INTERVAL="minutes1"
 COUNT=600
 
-# upwm = pyupbit.WebSocketManager("ticker", MARKET)
 
-# data=upwm.get()
-
-
-
-
-
-
-
-from pybithumb import WebSocketManager
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QIcon
-import time
-
-
-class Worker(QThread):
-    recv = pyqtSignal(str)
-    def run(self):
-        # create websocket for Bithumb
-        wm = WebSocketManager("ticker", ["BTC_KRW"])
-        while True:
-            data = wm.get()
-            self.recv.emit(data['content']['closePrice'])
-
-
-class App(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        label = QLabel("BTC", self)
-        label.move(20, 20)
-
-        self.price = QLabel("-", self)
-        self.price.move(80, 20)
-        self.price.resize(60, 20)
-
-        button = QPushButton("Run", self)
-        button.move(20, 50)
-        button.clicked.connect(self.click_btn)
-
-        self.th = Worker()
-        self.th.recv.connect(self.receive_msg)
-
-    @pyqtSlot(str)
-    def receive_msg(self, msg):
-        print(msg)
-        self.price.setText(msg)
-
-    def click_btn(self):
-       self.th.start()
-
-
-if __name__ == '__main__':
-   app = QApplication(sys.argv)
-   ex = App()
-   ex.show()
-   app.exec_()
-
-
-
-
-
-
-
-
-
-time.sleep()
+print("before end")
+exit()
 # 계속 실행
 while True:
     if get_candle_data(MARKET,INTERVAL,COUNT) == True:
