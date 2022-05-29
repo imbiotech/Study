@@ -1,4 +1,5 @@
 #2557번 Hello World!를 출력하시오.
+import time
 
 print("Hello World!")
 
@@ -989,11 +990,210 @@ for i in range(N):
 # 출력
 # 첫째 줄에는 유클리드 기하학에서 반지름이 R인 원의 넓이를, 둘째 줄에는 택시 기하학에서 반지름이 R인 원의 넓이를 출력한다. 정답과의 오차는 0.0001까지 허용한다
 
-
 import math
 r = int(input())
 print(math.pi*(r**2))
 print(((2*r)**2)/2)
+
+
+# 5086 번
+# 문제
+# 4 × 3 = 12이다.
+# 이 식을 통해 다음과 같은 사실을 알 수 있다.
+# 3은 12의 약수이고, 12는 3의 배수이다.
+# 4도 12의 약수이고, 12는 4의 배수이다.
+# 두 수가 주어졌을 때, 다음 3가지 중 어떤 관계인지 구하는 프로그램을 작성하시오.
+# 1. 첫 번째 숫자가 두 번째 숫자의 약수이다.
+# 2. 첫 번째 숫자가 두 번째 숫자의 배수이다.
+# 3. 첫 번째 숫자가 두 번째 숫자의 약수와 배수 모두 아니다.
+# 입력
+# 입력은 여러 테스트 케이스로 이루어져 있다. 각 테스트 케이스는 10,000이 넘지않는 두 자연수로 이루어져 있다. 마지막 줄에는 0이 2개 주어진다. 두 수가 같은 경우는 없다.
+# 출력
+# 각 테스트 케이스마다 첫 번째 숫자가 두 번째 숫자의 약수라면 factor를, 배수라면 multiple을, 둘 다 아니라면 neither를 출력한다.
+
+while True:
+    a, b = map(int,input().split())
+    if a == b == 0:
+        break
+    if b%a == 0:
+        print("factor")
+    elif a%b == 0:
+        print("multiple")
+    else:
+        print("neither")
+
+
+# 1010 번
+# 문제
+# 재원이는 한 도시의 시장이 되었다. 이 도시에는 도시를 동쪽과 서쪽으로 나누는 큰 일직선 모양의 강이 흐르고 있다.
+# 하지만 재원이는 다리가 없어서 시민들이 강을 건너는데 큰 불편을 겪고 있음을 알고 다리를 짓기로 결심하였다.
+# 강 주변에서 다리를 짓기에 적합한 곳을 사이트라고 한다.
+# 재원이는 강 주변을 면밀히 조사해 본 결과 강의 서쪽에는 N개의 사이트가 있고 동쪽에는 M개의 사이트가 있다는 것을 알았다. (N ≤ M)
+# 재원이는 서쪽의 사이트와 동쪽의 사이트를 다리로 연결하려고 한다.
+# (이때 한 사이트에는 최대 한 개의 다리만 연결될 수 있다.)
+# 재원이는 다리를 최대한 많이 지으려고 하기 때문에 서쪽의 사이트 개수만큼 (N개) 다리를 지으려고 한다.
+# 다리끼리는 서로 겹쳐질 수 없다고 할 때 다리를 지을 수 있는 경우의 수를 구하는 프로그램을 작성하라.
+# 입력
+# 입력의 첫 줄에는 테스트 케이스의 개수 T가 주어진다.
+# 그 다음 줄부터 각각의 테스트케이스에 대해 강의 서쪽과 동쪽에 있는 사이트의 개수 정수 N, M (0 < N ≤ M < 30)이 주어진다.
+# 출력
+# 각 테스트 케이스에 대해 주어진 조건하에 다리를 지을 수 있는 경우의 수를 출력한다.
+
+from math import factorial
+for i in range(int(input())):
+    a, b = map(int,input().split())
+    print(int(factorial(b)/(factorial(a)*factorial(b-a))))
+
+
+# 11050 번
+# 문제
+# 자연수 N과 정수 K가 주어졌을 때 이항계수 binom{N}{K}를 구하는 프로그램을 작성하시오.
+#입력
+# 첫째 줄에 N과 정수 K가 주어진다.(1 ≤ N ≤ 10, 0 ≤ K ≤ N)
+# 출력
+# binom{N}{K}를 출력한다.
+
+from math import factorial
+N, K = map(int,input().split())
+print(int(factorial(N)/(factorial(K)*factorial(N-K))))
+
+
+# 11051 번
+# 문제
+# 자연수 N과 정수 K가 주어졌을 때 이항계수 binom{N}{K}를 10,007로 나눈 나머지를 구하는 프로그램을 작성하시오.
+#입력
+# 첫째 줄에 N과 정수 K가 주어진다.(1 ≤ N ≤ 10, 0 ≤ K ≤ N)
+# 출력
+# binom{N}{K}를 10,007로 나눈 나머지를 출력한다.
+
+# 부동 소수점에 관한 문제, N_K 계산 시 / 가 아닌 // 를 사용
+from math import factorial
+N, K = map(int,input().split())
+N_K = int(factorial(N)//(factorial(K)*factorial(N-K)))
+print(int(N_K%10007))
+
+
+# 1037 번
+# 문제
+# 양수 A가 N의 진짜 약수가 되려면, N이 A의 배수이고, A가 1과 N이 아니어야 한다.
+# 어떤 수 N의 진짜 약수가 모두 주어질 때, N을 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 N의 진짜 약수의 개수가 주어진다. 이 개수는 50보다 작거나 같은 자연수이다.
+# 둘째 줄에는 N의 진짜 약수가 주어진다. 1,000,000보다 작거나 같고, 2보다 크거나 같은 자연수이고, 중복되지 않는다.
+# 출력
+# 첫째 줄에 N을 출력한다. N은 항상 32비트 부호있는 정수로 표현할 수 있다.
+
+count = int(input())
+divisor = list(map(int,input().split()))
+divisor.sort()
+print(divisor[0]*divisor[-1])
+# 또는 .sort() 없이 max(divisor)*min(divisor)
+
+
+# 1676 번
+# 문제
+# N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 N이 주어진다. (0 ≤ N ≤ 500)
+# 출력
+# 첫째 줄에 구한 0의 개수를 출력한다.
+
+# 10으로 나누면서 확인
+from math import factorial
+a = factorial(int(input()))
+count = 0
+while a%10==0:
+    a//=10
+    count+=1
+print(count)
+
+# 역순 리스트 만들어서 [0]부터 확인
+from math import factorial
+a = list(str(factorial(int(input()))))
+a.reverse()
+count = 0
+for i in a:
+    if i=="0":
+        count+=1
+    else:
+        break
+print(count)
+
+# 역순 리스트 만들어서 index 확인
+from math import factorial
+a = list(str(factorial(int(input()))))
+a.reverse()
+count = len(a)
+for i in range(1,10):
+    if i in a:
+        count=min(0, a.index(i))
+print(count)
+
+# 충분히 많은 2의 개수를 고려하여 5의 배수 = 0이 1개, 5*5의 배수 = 0이 2개, 5*5*5의 배수 = 0이 3개 로 계산
+a = int(input())
+print(a//5+a//25+a//125)
+
+
+# 2609 번
+# 문제
+# 두 개의 자연수를 입력받아 최대 공약수와 최소 공배수를 출력하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에는 두 개의 자연수가 주어진다. 이 둘은 10,000이하의 자연수이며 사이에 한 칸의 공백이 주어진다.
+# 출력
+# 첫째 줄에는 입력으로 주어진 두 수의 최대공약수를, 둘째 줄에는 입력으로 주어진 두 수의 최소 공배수를 출력한다.
+
+a, b = map(int,input().split())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3036 번
+# 문제
+# 상근이는 창고에서 링 N개를 발견했다. 상근이는 각각의 링이 앞에 있는 링과 뒤에 있는 링과 접하도록 바닥에 내려놓았다.
+# 상근이는 첫 번째 링을 돌리기 시작했고, 나머지 링도 같이 돌아간다는 사실을 발견했다.
+# 나머지 링은 첫 번째 링 보다 빠르게 돌아가기도 했고, 느리게 돌아가기도 했다.
+# 이렇게 링을 돌리다 보니 첫 번째 링을 한 바퀴 돌리면, 나머지 링은 몇 바퀴 도는지 궁금해졌다.
+# 링의 반지름이 주어진다. 이때, 첫 번째 링을 한 바퀴 돌리면, 나머지 링은 몇 바퀴 돌아가는지 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 링의 개수 N이 주어진다. (3 ≤ N ≤ 100)
+# 다음 줄에는 링의 반지름이 상근이가 바닥에 놓은 순서대로 주어진다. 반지름은 1과 1000를 포함하는 사이의 자연수이다.
+# 출력
+# 출력은 총 N-1줄을 해야 한다.
+# 첫 번째 링을 제외한 각각의 링에 대해서, 첫 번째 링을 한 바퀴 돌리면 그 링은 몇 바퀴 도는지 기약 분수 형태 A/B로 출력한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 10815 번 - 시간 초과
@@ -1008,6 +1208,7 @@ print(((2*r)**2)/2)
 # 출력
 # 첫째 줄에 입력으로 주어진 M개의 수에 대해서, 각 수가 적힌 숫자 카드를 상근이가 가지고 있으면 1을, 아니면 0을 공백으로 구분해 출력한다.
 
+# 시간 초과
 from sys import stdin
 N = int(stdin.readline())
 N_list=list(map(int,stdin.readline().split()))
@@ -1020,6 +1221,77 @@ for i in M_list:
     else:
         C_list.append(0)
 print(C_list)
+
+# 런타임 에러, 외부 lib 없음
+from sys import stdin
+import pandas as pd
+N = int(stdin.readline())
+N_df=pd.DataFrame(map(int,stdin.readline().split()),columns=["N"])
+M = int(stdin.readline())
+M_df=pd.DataFrame(map(int,stdin.readline().split()),columns=["M"])
+Filter = M_df["M"].isin(N_df["N"])
+M_df.loc[Filter, "M"] = 1
+M_df.loc[-Filter, "M"] = 0
+print(" ".join(list(M_df["M"])))
+
+
+
+
+
+# 2004 번 - 시간 초과
+# 문제
+# binom{n}{m}의 끝자리 $0$의 개수를 출력하는 프로그램을 작성하시오
+# 입력
+# 첫째 줄에 정수 n, m (0 ≤ m ≤ n ≤ 2,000,000,000, n != 0 )이 들어온다.
+# 출력
+# 첫째 줄에 binom{n}{m}의 끝자리 0의 개수를 출력한다.
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = int(factorial(n)//(factorial(m)*factorial(n-m)))
+count = 0
+while n_m%10==0:
+    n_m//=10
+    count+=1
+print(count)
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = 0
+for i in n_m:
+    if i=="0":
+        count+=1
+    else:
+        break
+print(count)
+
+# 시간 초과
+from sys import stdin
+from math import factorial
+n, m = map(int,stdin.readline().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = 0
+for i in n_m:
+    if i=="0":
+        count+=1
+    else:
+        break
+print(count)
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = len(n_m)
+for i in range(1,10):
+    count=min(0, n_m.index(i))
+print(count)
 
 
 # 2581 번 - 시간 초과

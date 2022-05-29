@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title style="text-align:center">PyCh Jobscrapper</title>
+    </head>
+    <body>
+        <h1 style="text-align:center">Remote Jobs</h1>
+        <!-- padding = 박스와 글 사이의 여백, box-shadow = 그림자 효과 -->
+        <div style="margin: 0 auto; width:50%; padding:10px; box-shadow: 1px 1px 1px 1px gray">
+          <h3> Search by term:</h3>
+          <!-- 입력된 내용에 따라서 /report?text={} 로 주소 타이핑 -->
+          <form action="/report" method="get">
+            <!-- required는 필수 입력칸을 의미, 입력하지 않으면 반응하지 않음 -->
+            <input placeholder="i.e python" required name="text"/>
+            <br>
+            <button style="background-color: skyblue; border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; boarder; none">Find my job</button>
+          </form>
+        </div>
+    </body>
+</html>

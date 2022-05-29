@@ -79,9 +79,7 @@ def exporter_csv(jobs):
     file = open("D:\Python\pj\Job_result.csv", "w")
     writer = csv.writer(file)
     writer.writerow(["title", "company", "location", "link"])
-    count = 1
     for job in jobs:
-        count += 1
         # Dict 형에서 List 형으로 전환할 때 key만 가져오고 싶으면 Dict.keys() value만 가져오고 싶으면 Dict.values()
         writer.writerow(list(job.values()))
     return

@@ -263,11 +263,11 @@ Please write a URL or URLs you want to check. (separated by comma)""")
   for i in urls:
     try:
       req = requests.get(i)
-      # 1xx - informational
-      # 2xx - success
-      # 3xx - redirection
-      # 4xx - client error
-      # 5xx - server error
+      """1xx - informational
+      2xx - success
+      3xx - redirection
+      4xx - client error
+      5xx - server error"""
       if 200<=req.status_code<300:
         print(f"{i} is up!")
     except:
@@ -285,6 +285,7 @@ print("k. bye!")
 
 ######################################################################################################################
 # 5일차
+# 답안: https://replit.com/@kariray/Day8#main.py
 
 import os
 import csv
@@ -338,58 +339,167 @@ for i in get_goodsbox:
     # Dict 형에서 List 형으로 전환할 때 key만 가져오고 싶으면 Dict.keys() value만 가져오고 싶으면 Dict.values()
     writer.writerow(list(alba.values()))
 
-# goodsBox
-# <li class="impact">
-#   <div class="B_MyAd_"></div>
-#   <a class="goodsBox-info" href="http://yoogane.alba.co.kr/">
-#     <span class="logo">
-#       <img alt="유가네닭갈비" src="//image-logo.alba.kr/data_image2/logo/brand/20210315122240299.gif"/>
-#     </span>
-#     <span class="company">유가네닭갈비</span>
-#     <span class="title">
-#       <span>매장 아르바이트/직원 채용</span>
-#     </span>
-#     <span class="wrap">
-#       <span class="local">전국</span>
-#       <span class="pay">
-#         <span class="payLetter">공고별 확인</span>
-#         <span class="payIcon talk"></span>
-#       </span>
-#     </span>
-#   </a>
-# </li>
-# goodslist
-# <tr class="divide">
-#   <td class="local first" scope="row">
-#     <div class="L_MyAd_"></div>
-#     경기 안성시
-#   </td>
-#   <td class="title">
-#     <a class="" href="/job/Detail.asp?adid=113909141&amp;areacd=&amp;workaddr1=&amp;workaddr2=&amp;jobkind=&amp;jobkindsub=&amp;jobkindmulti=&amp;gendercd=&amp;agelimitcd=&amp;agelimit=0&amp;worktime=&amp;weekdays=&amp;searchterm=&amp;paycd=&amp;paystart=&amp;payend=&amp;workperiodcd=&amp;workstartdt=&amp;workenddt=&amp;workchkyn=&amp;workweekcd=&amp;targetcd=&amp;streetunicd=&amp;streetstationcd=&amp;unicd=&amp;schnm=&amp;schtext=&amp;orderby=freeorder&amp;acceptmethod=&amp;eleccontract=&amp;careercd= &amp;lastschoolcd=&amp;welfarecd=&amp;careercdunrelated=&amp;lastschoolcdunrelated=&amp;strAreaMulti=&amp;genderunrelated=&amp;special=&amp;hiretypecd=&amp;totalCount=165&amp;listmenucd=BRANDSITE">
-#       <span class="company"> 플레이타임그룹 스타필드 안성점 상상스</span>
-#       <span class="title">스타필드 안성점 상상스케치(어린이 만들기카페) 평일/주말 아르바이트 모집</span>
-#     </a>
-#     <span class="funcBtn">
-#       <a class="applBtn scrap" href="javascript:void(0);" id="joblistscrapgen113909141" onclick="if( confirm('개인회원으로 로그인 후 이용 가능한 서비스입니다.\n지금 로그인 하시겠습니까?') ) { loginPerson('/job/brand/main.asp', ''); }">
-#         스크랩
-#       </a>
-#       <a class="applBtn thumbView" href="#" id="JobFreeListTd113909141" onclick="JobPreview.PREVIEW('JobFreeList','113909141',''); return false;">
-#         요약보기
-#       </a>
-#       <a class="applBtn blankView" href="/job/Detail.asp?adid=113909141&amp;areacd=&amp;workaddr1=&amp;workaddr2=&amp;jobkind=&amp;jobkindsub=&amp;jobkindmulti=&amp;gendercd=&amp;agelimitcd=&amp;agelimit=0&amp;worktime=&amp;weekdays=&amp;searchterm=&amp;paycd=&amp;paystart=&amp;payend=&amp;workperiodcd=&amp;workstartdt=&amp;workenddt=&amp;workchkyn=&amp;workweekcd=&amp;targetcd=&amp;streetunicd=&amp;streetstationcd=&amp;unicd=&amp;schnm=&amp;schtext=&amp;orderby=freeorder&amp;acceptmethod=&amp;eleccontract=&amp;careercd= &amp;lastschoolcd=&amp;welfarecd=&amp;careercdunrelated=&amp;lastschoolcdunrelated=&amp;strAreaMulti=&amp;genderunrelated=&amp;special=&amp;hiretypecd=&amp;totalCount=165&amp;listmenucd=BRANDSITE" target="_blank">
-#         새창보기
-#       </a>
-#     </span>
-#   </td>
-#   <td class="data">
-#     <span class="consult">시간협의</span>
-#   </td>
-#   <td class="pay">
-#     <span class="payIcon hour">시급</span>
-#   <br/>
-#     <span class="number">9,660</span>
-#   </td>
-#   <td class="regDate last">
-#     <strong>1시간전</strong>
-#   </td>
-# </tr>
+######################################################################################################################
+# 5일차
+"""
+보일러플레이트를 이용하여 세 종류의 웹사이트에서 정보를 긁어와 원격 직업을 찾는 "job scrapper"를 만드세요.
+This is how the website should behave: https://imgur.com/DCIdYE5
+웹사이트는 .csv 파일 내보내기가 가능해야 됩니다.
+반복 검색 속도가 빨라지기 위해서 fakeDB를 구현해야 됩니다.
+아래에 있는 세 종류의 웹사이트를 모두 스크랩해야 됩니다.
+https://weworkremotely.com/
+https://stackoverflow.com/jobs
+https://remoteok.io/
+
+These are the URLs that will give you remote jobs for the word 'python'
+https://stackoverflow.com/jobs?r=true&q=python
+https://weworkremotely.com/remote-jobs/search?term=python
+https://remoteok.io/remote-dev+python-jobs
+Good luck!
+"""
+
+import os
+import csv
+import requests
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request, redirect
+
+""" ~~~~~~~~ HTML 파트 ~~~~~~~~ """
+app = Flask("PyCh", template_folder="NOMAD_Challenge\HTML Template")
+
+@app.route("/")
+def home():
+  return render_template("Flask.html")
+
+@app.route("/report")
+def report():
+  text = request.args.get("text")
+  text = ("+").join(list(text.split()))
+  if text:
+    text = text.lower()
+    # Fake_DB에 해당 Text가 존재할 경우 jobs에 결과값을 바로 출력하고, 없을 경우 스크래핑 후 Fake_DB에 저장, 동일 키워드 검색 횟수로 Count_DB 사용
+    if Fake_DB.get(text):
+      jobs = Fake_DB[text]
+      Count_DB[text] += 1
+    else:
+      jobs = search_all(text)
+      Fake_DB[text] = jobs
+      Count_DB[text] = 1
+  else:
+    return redirect("/")
+  return render_template \
+    ("Report.html", text=text,
+     ResultsNumber=len(jobs), SerchingCount=Count_DB[text],
+     jobs=jobs
+     )
+
+@app.route("/export")
+def export():
+  try:
+    text = request.args.get("text")
+    if not text:
+      raise Exception()
+    text = text.lower()
+    jobs = Fake_DB.get(text)
+    if not jobs:
+      raise Exception()
+    to_csv(jobs, text)
+    return f"Generate CSV for {text}"
+  except:
+    return redirect("/")
+
+""" ~~~~~~~~ 함수 파트 ~~~~~~~~ """
+
+def search_all(Search):
+  URL1st = f"https://weworkremotely.com/remote-jobs/search?term={Search}"
+  URL2nd = "https://stackoverflow.com/jobs"
+  URL3rd = f"https://remoteok.com/remote-{Search}-jobs"
+  headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"}
+
+  WWR_worklist = WWR(URL1st)
+  # SOF_worklist = SOF(URL2nd)
+  ROK_worklist = ROK(URL3rd, headers)
+
+  return WWR_worklist + ROK_worklist
+
+def WWR(URL):
+  results = requests.get(URL)
+  soup = BeautifulSoup(results.text, 'html.parser')
+
+  WWR = []
+  big_container = soup.find("div", {"class": "jobs-container"})
+  section_container = big_container.find_all("section", {"class": "jobs"})
+
+  for i in section_container:
+    features = i.find_all("li", {"class": "feature"})
+    # section = i.find("a").text
+    # print("#"*5,section,"#"*5,"\n")
+    for j in features:
+      company, contract, site = j.find_all("span", {"class": "company"})
+      title = j.find("span", {"class": "title"})
+      appliance = "https://weworkremotely.com" + j.find_all("a")[1]["href"]
+      WWR.append(
+        {
+          "company": company.text,
+          "title": title.text,
+          "contract": contract.text,
+          "site": site.text,
+          "appliance": appliance
+        }
+      )
+  return WWR
+
+def ROK(URL, headers):
+  results = requests.get(URL, headers=headers)
+
+  soup = BeautifulSoup(results.text, 'html.parser')
+
+  ROK = []
+  jobs = soup.find_all("tr", {"class": "job"})
+
+  for i in jobs:
+    company = i.find("h3")
+    title = i.find("h2")
+    site_contract = i.find_all("div", {"class": "location"})
+    try:
+      site = site_contract[0].text
+      contract = site_contract[1].text
+    except IndexError:
+      site = "N/A"
+      contract = "N/A"
+    except:
+      if "location tooltip" in site_contract[0]:
+        site = site_contract[0].text
+        contract = "N/A"
+      else:
+        site = "N/A"
+        contract = site_contract[0].text
+    appliance = "https://remoteok.com/" + i.find("a")["href"]
+
+    ROK.append(
+      {
+        "company": company.text.strip("\n"),
+        "title": title.text.strip("\n"),
+        "contract": contract,
+        "site": site,
+        "appliance": appliance
+      }
+    )
+
+  return ROK
+
+def to_csv(jobs_list, key):
+  file = open(f"{key}.csv", "w")
+  WR = csv.writer(file)
+  WR.writerow(["company", "title", "contract", "site", "appliance"])
+  for job in jobs_list:
+    WR.writerow(list(job.values()))
+
+""" ~~~~~~~~ 실행 파트 ~~~~~~~~ """
+os.system("clear")
+
+Fake_DB = {}
+Count_DB = {}
+
+app.run(host='0.0.0.0')

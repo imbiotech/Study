@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Job Search
+    </title>
+    <style>
+      section {
+        display:flex;
+        gap:20px;
+        flex-direction: column;
+        direction: repeat(1, 1fr)
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>Remote Jobs</h1>
+      <h3> <!-- 변수는 다음과 같이 지정하여 입력 -->
+      {{ResultsNumber}} {{text}} jobs found. <br>
+      {{SerchingCount}} times of searching {{text}} done.
+      </h3>
+      <a href="/export?text={{text}}" text-align=center style="font-size:8px">
+        Export CSV
+      </a><br>
+      <a href="/" style="text-align:center; font-size:6px">
+        ← Go back
+      </a>
+    </center>
+    <section>
+      <!-- 파이썬 함수는 다음과 같이 지정하여 입력 -->
+      {% for job in jobs %}
+      <h3>
+        {{job.title}}
+        <h4>{{job.company}}<br>{{job.site}}<br>{{job.contract}}<br><br>
+        <a href={{job.appliance}} target="_blank">Apply</a>
+        </h4>
+      </h3>
+      <hr width=100% style="color:grey"/>
+      {% endfor %}
+    </section>
+  </body>
+</html>
