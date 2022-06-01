@@ -1,5 +1,4 @@
 #2557번 Hello World!를 출력하시오.
-import time
 
 print("Hello World!")
 
@@ -1145,55 +1144,364 @@ print(a//5+a//25+a//125)
 a, b = map(int,input().split())
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 3036 번
+# 1065 번
 # 문제
-# 상근이는 창고에서 링 N개를 발견했다. 상근이는 각각의 링이 앞에 있는 링과 뒤에 있는 링과 접하도록 바닥에 내려놓았다.
-# 상근이는 첫 번째 링을 돌리기 시작했고, 나머지 링도 같이 돌아간다는 사실을 발견했다.
-# 나머지 링은 첫 번째 링 보다 빠르게 돌아가기도 했고, 느리게 돌아가기도 했다.
-# 이렇게 링을 돌리다 보니 첫 번째 링을 한 바퀴 돌리면, 나머지 링은 몇 바퀴 도는지 궁금해졌다.
-# 링의 반지름이 주어진다. 이때, 첫 번째 링을 한 바퀴 돌리면, 나머지 링은 몇 바퀴 돌아가는지 구하는 프로그램을 작성하시오.
+# 어떤 양의 정수 X의 각 자리가 등차수열을 이룬다면, 그 수를 한수라고 한다.
+# 등차수열은 연속된 두 개의 수의 차이가 일정한 수열을 말한다.
+# N이 주어졌을 때, 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력하는 프로그램을 작성하시오.
 # 입력
-# 첫째 줄에 링의 개수 N이 주어진다. (3 ≤ N ≤ 100)
-# 다음 줄에는 링의 반지름이 상근이가 바닥에 놓은 순서대로 주어진다. 반지름은 1과 1000를 포함하는 사이의 자연수이다.
+# 첫째 줄에 1,000보다 작거나 같은 자연수 N이 주어진다.
 # 출력
-# 출력은 총 N-1줄을 해야 한다.
-# 첫 번째 링을 제외한 각각의 링에 대해서, 첫 번째 링을 한 바퀴 돌리면 그 링은 몇 바퀴 도는지 기약 분수 형태 A/B로 출력한다.
+# 첫째 줄에 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력한다.
+
+N = int(input())
+if N < 100:
+    print(N)
+else:
+    count=99
+    for i in range(100,N+1):
+        A = i // 100
+        B = i % 100 // 10
+        C = i % 10
+        if 2 * B == A + C:
+            count+=1
+    print(count)
 
 
+# 2775 번
+# 문제
+# 평소 반상회에 참석하는 것을 좋아하는 주희는 이번 기회에 부녀회장이 되고 싶어
+# 각 층의 사람들을 불러 모아 반상회를 주최하려고 한다.
+# 이 아파트에 거주를 하려면 조건이 있는데,
+# “a층의 b호에 살려면 자신의 아래(a-1)층의 1호부터 b호까지 사람들의 수의 합만큼 사람들을 데려와 살아야 한다”
+# 는 계약 조항을 꼭 지키고 들어와야 한다.
+# 아파트에 비어있는 집은 없고 모든 거주민들이 이 계약 조건을 지키고 왔다고 가정했을 때,
+# 주어지는 양의 정수 k와 n에 대해 k층에 n호에는 몇 명이 살고 있는지 출력하라.
+# 단, 아파트에는 0층부터 있고 각층에는 1호부터 있으며, 0층의 i호에는 i명이 산다.
+# 입력
+# 첫 번째 줄에 Test case의 수 T가 주어진다. 그리고 각각의 케이스마다 입력으로 첫 번째 줄에 정수 k, 두 번째 줄에 정수 n이 주어진다
+# 출력
+# 각각의 Test case에 대해서 해당 집에 거주민 수를 출력하라.
+
+# 풀이 1 - 시간 초과
+def nk(k,n):
+    if k==0:
+        return n # 0층 i호는 i
+    else:
+        sum = 0
+        for i in range(1,n+1): # k층 n호는 k-1층의 1~n호 합
+            sum+=nk(k-1,i)
+        return sum
+
+for i in range(int(input())):
+    k = int(input())
+    n = int(input())
+    print(nk(k,n))
+
+# 풀이 2 - 시간 초과
+def nk(k,n):
+    if k==0:
+        return n
+    elif n==1:
+        return 1
+    else:
+        return nk(k,n-1)+nk(k-1,n) # k층 n호는 k층 n-1호와 k-1층 n호의 합과 같음
+
+for i in range(int(input())):
+    k = int(input())
+    n = int(input())
+    print(nk(k,n))
+
+# 풀이 3 - 파스칼의 삼각형 문제였음......
+from math import factorial
+
+for i in range(int(input())):
+    k = int(input())
+    n = int(input())
+    print(int(factorial(k+n)/(factorial(n-1)*factorial(k+1))))
 
 
+# 1978 번
+# 문제
+# 주어진 수 N개 중에서 소수가 몇 개인지 찾아서 출력하는 프로그램을 작성하시오.
+# 입력
+# 첫 줄에 수의 개수 N이 주어진다. N은 100이하이다. 다음으로 N개의 수가 주어지는데 수는 1,000 이하의 자연수이다.
+# 출력
+# 주어진 수들 중 소수의 개수를 출력한다.
+
+# 풀이 1
+cnt=0
+N = int(input()) # 숫자 개수 입력
+n_list=list(map(int,input().split())) # 주어진 수
+if max(n_list) == 1:
+    print(0)
+else:
+    m_list = [i for i in range(2, max(n_list)+1)] # 2 ~ n_list의 최대값까지 리스트 생성
+    # m_list의 각 원소의 배수를 m_list에서 제외함
+    for i in m_list:
+        print(f"#####{i}#####")
+        for k in range(2, max(m_list)):
+            if i*k in m_list:
+                m_list.remove(i*k)
+                print(f"{i} * {k} = {i*k} is removed")
+print(m_list)
+for i in n_list:
+    if i in m_list:
+        cnt+=1
+print(cnt)
+
+# 풀이? - prime number list를 다 만들고 있는지만 체크
+N = int(input()) # 숫자 개수 입력
+n_list=list(map(int,input().split())) # 주어진 수
+cnt=0
+primenumber = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+               101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
+               211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293,
+               307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397,
+               401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499,
+               503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599,
+               601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691,
+               701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797,
+               809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887,
+               907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997]
+for i in n_list:
+    if i in primenumber:
+        cnt+=1
+print(cnt)
+
+# 풀이 2 - 입력된 list를 나눠서 맞는지만 먼저 체크
+def prime(n):
+    if n == 1:
+        return 0
+    else:
+        m = int(n**0.5+1)
+        o = 1
+
+        for i in range(2,m):
+            if n % i == 0:
+                o = 0
+                break
+        return o
+
+N = int(input())
+n_list = list(map(int,input().split()))
+m_list = []
+for i in n_list:
+    m_list.append(prime(i))
+print(sum(m_list))
 
 
+# 2581 번
+# 문제
+# 자연수 M과 N이 주어질 때 M이상 N이하의 자연수 중 소수인 것을 모두 골라 이들 소수의 합과 최솟값을 찾는 프로그램을 작성하시오.
+# 예를 들어 M=60, N=100인 경우 60이상 100이하의 자연수 중 소수는 61, 67, 71, 73, 79, 83, 89, 97 총 8개가 있으므로, 이들 소수의 합은 620이고, 최솟값은 61이 된다.
+# 입력
+# 입력의 첫째 줄에 M이, 둘째 줄에 N이 주어진다.
+# M과 N은 10,000이하의 자연수이며, M은 N보다 작거나 같다.
+# 출력
+# M이상 N이하의 자연수 중 소수인 것을 모두 찾아 첫째 줄에 그 합을, 둘째 줄에 그 중 최솟값을 출력한다.
+# 단, M이상 N이하의 자연수 중 소수가 없을 경우는 첫째 줄에 -1을 출력한다.
+
+# 풀이 1 - 시간 초과
+n=int(input())
+m=int(input())
+num_list=[i for i in range(1,m+1)]
+for i in num_list:
+    if i == 1:
+        continue
+    else:
+        for k in range(2, m+1):
+            if i*k in num_list:
+                num_list.remove(i*k)
+for i in range(1,n):
+    try:
+        num_list.remove(i)
+    except:
+        continue
+print(sum(num_list))
+print(min(num_list))
+
+# 풀이 2 - 시간 초과
+min_ = int(input())
+max_ = int(input())
+m_list = [i for i in range(min_, max_+1)] # min ~ max까지 리스트 생성
+# m_list의 각 원소의 배수를 m_list에서 제외함
+for i in range(2, int(max(m_list)**0.5+1)):
+    for k in range(2, max(m_list)+1):
+        if i*k in m_list:
+            m_list.remove(i*k)
+print(sum(m_list))
+print(min(m_list))
+
+# 풀이 3 - 소수 판별 함수 사용
+def prime(n):
+    if n == 1:
+        return 0
+    else:
+        for i in range(2, int(n**0.5 + 1)):
+            if n % i == 0:
+                n = 0
+                break
+    return n
+min_ = int(input())
+max_ = int(input())
+m_list = [i for i in range(min_, max_+1)] # min ~ max까지 리스트 생성
+M_LIST = list(set(map(prime,m_list))) # map을 이용해서 m_list 원소에 prime 을 적용하고 M_LIST에 반환
+if 0 in M_LIST:
+    M_LIST.remove(0)
+if len(M_LIST) == 0:
+    print(-1)
+else:
+    print(sum(M_LIST))
+    print(min(M_LIST))
 
 
+# 1929 번 - 개선 필요
+# 문제
+# M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 자연수 M과 N이 빈 칸을 사이에 두고 주어진다. (1 ≤ M ≤ N ≤ 1,000,000) M이상 N이하의 소수가 하나 이상 있는 입력만 주어진다.
+# 출력
+# 한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.
+def prime(n):
+    if n == 1:
+        return 0
+    else:
+        for i in range(2, int(n**0.5 + 1)):
+            if n % i == 0:
+                n = 0
+                break
+    return n
+M, N = map(int,input().split())
+M_N = [i for i in range(M, N+1)] # min ~ max까지 리스트 생성
+prlist = list(set(map(prime,M_N))) # map을 이용해서 prlist 원소에 prime 을 적용하고 prlist에 반환
+if 0 in prlist:
+    prlist.remove(0)
+prlist.sort()
+for i in prlist:
+    print(i)
 
 
+# 25191 번
+# 문제
+# 치킨 댄스를 추고 있는 곰곰이를 본 임스는 치킨을 먹고 싶어졌다. 임스는 치킨 1마리를 먹을 때 반드시 집에 있는 콜라 2개나 맥주 1개와 같이 먹어야 한다.
+# 또한, 치킨집에 있는 치킨의 개수보다 치킨을 많이 시켜먹을 수는 없다.
+# 치킨집에 있는 치킨의 개수와 임스의 집에 있는 콜라, 맥주의 개수가 주어졌을 때, 임스가 시켜먹을 수 있는 치킨의 총 개수를 출력하시오.
+# 입력
+# 첫 번째 줄에는 치킨집에 있는 치킨의 총 개수를 나타내는 정수 N이 주어진다. (1 <= N <= 1000)
+# 두 번째 줄에는 임스의 집에 있는 콜라의 개수 A와 맥주의 개수 B가 공백을 사이에 두고 주어진다. (1 <= A, B <= 1000, A, B는 정수)
+# 출력
+# 임스가 시켜먹을 수 있는 치킨의 총 개수를 출력하시오.
+
+Chicken = int(input())
+Cola, Beer = map(int,input().split())
+print(min([Chicken, Cola//2 + Beer]))
 
 
+# 25193 번
+# 문제
+# 곰곰이는 치킨을 좋아한다. 그러다 보니 매 끼니에 치킨을 먹고 있다. 당신은 곰곰이의 트레이너로서 곰곰이의 식단을 관리해주기로 했다.
+# 곰곰이가 N일간 먹어야 할 음식들의 리스트가 주어졌을 때, 리스트의 순서를 원하는 대로 조정하여 곰곰이가 연속으로 치킨을 먹는 날의 최댓값을 가장 작게 만들려고 한다.
+# 곰곰이의 건강을 위해 위와 같은 프로그램을 작성해 보자.
+# 입력
+# 첫 번째 줄에 식단을 정할 일수 N (1 <= N <= 100,000)이 주어진다.
+# 두 번째 줄에 음식의 리스트인 길이 N의 문자열 S가 주어진다. 문자열은 영어 대문자로만 이루어져 있다. S_i가 C인 경우, i번째 음식이 치킨이며, 그 외의 경우에는 다른 음식이다.
+# 출력
+# 곰곰이가 연속으로 치킨을 먹는 날의 최댓값의 최솟값을 구하여라.
+
+N = int(input())
+diet_list = list(map(list,input().split()))[0]
+C = diet_list.count("C")
+O = len(diet_list) - C
+if O == 0: # 다른 음식이 없을 때
+    print(C)
+elif C == 0: # 치킨이 없을 때
+    print(0)
+else: # 치킨과 다른 음식이 섞여 있을 때
+    make = []
+    for i in range(1, C//O+1):
+        for j in range(i+1):
+            if C == i * O + j: # 나눗셈 식을 활용해서 피제수 = 제수 * 몫 + 나머지 방식으로 풀이. 단 나머지가 몫과 같을 수 있음
+                make.append(i)
+    print(min(make))
+
+""" ######################################## 아래는 수정 필요 ######################################## """
+
+# 25192 번 - 시간 초과
+# 문제
+# 알고리즘 입문방 오픈 채팅방에서는 새로운 분들이 입장을 할 때마다 곰곰티콘을 사용해 인사를 한다. 이를 본 문자열 킬러 임스는 채팅방의 기록을 수집해 그 중 곰곰티콘이 사용된 횟수를 구해 보기로 했다.
+# ENTER는 새로운 사람이 채팅방에 입장했음을 나타낸다. 그 외는 채팅을 입력한 유저의 닉네임을 나타낸다. 닉네임은 숫자 또는 영문 대소문자로 구성되어 있다.
+# 새로운 사람이 입장한 이후 처음 채팅을 입력하는 사람은 반드시 곰곰티콘으로 인사를 한다. 그 외의 기록은 곰곰티콘을 쓰지 않은 평범한 채팅 기록이다.
+# 채팅 기록 중 곰곰티콘이 사용된 횟수를 구해보자!
+# 입력
+# 첫 번째 줄에는 채팅방의 기록 수를 나타내는 정수 N 이 주어진다. (1 <= N <= 100,000)
+# 두 번째 줄부터 N 개의 줄에 걸쳐 새로운 사람의 입장을 나타내는 ENTER, 혹은 채팅을 입력한 유저의 닉네임이 문자열로 주어진다. (1 <= 문자열 길이 <= 20)
+# 첫 번째 주어지는 문자열은 무조건 ENTER이다.
+# 출력
+# 채팅 기록 중 곰곰티콘이 사용된 횟수를 출력하시오.
+
+# 풀이 1
+count = 0 # 횟수 체크 변수 선언
+for _ in range(int(input())):
+    log = input()
+    if log == "ENTER": # 채팅 로그가 "입장"이면 채팅 로그 리스트 초기화
+        gomgom = []
+    elif log not in gomgom: # 채팅 로그 리스트 내에 닉네임이 없을 경우 닉네임 삽입하고, 곰곰티콘 횟수 1회 증가
+        gomgom.append(log)
+        count += 1
+print(count)
 
 
+# 11653 번 - 시간 초과
+# 문제
+# 정수 N이 주어졌을 때, 소인수분해하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 정수 N (1 ≤ N ≤ 10,000,000)이 주어진다.
+# 출력
+# N의 소인수분해 결과를 한 줄에 하나씩 오름차순으로 출력한다. N이 1인 경우 아무것도 출력하지 않는다.
 
+# 풀이 1 - 소수를 먼저 입력해 놓고 나누기, 시간 초과
+primenumber = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+               101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
+               211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293,
+               307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397,
+               401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499,
+               503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599,
+               601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691,
+               701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797,
+               809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887,
+               907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997]
+N = int(input())
+while N>1:
+    for i in primenumber:
+        if N % i == 0:
+            print(i)
+            N /= i
+            break
 
+# 풀이 2 - N 이하의 소수를 구하고 소인수분해 하기, 시간 초과
+def prime(n):
+    if n == 1:
+        return 0
+    else:
+        m = int(n**0.5+1)
+        for i in range(2,m):
+            if n % i == 0:
+                n = 0
+                break
+        return n
 
-
-
-
-
-
-
+N = int(input())
+N_list = [i for i in range(int(N**0.5+1))]
+M_list = list(set(map(prime,N_list)))
+if 0 in M_list:
+    M_list.remove(0)
+while N>1:
+    for i in M_list:
+        if N % i == 0:
+            print(i)
+            N /= i
+            break
 
 
 # 10815 번 - 시간 초과
@@ -1233,9 +1541,6 @@ Filter = M_df["M"].isin(N_df["N"])
 M_df.loc[Filter, "M"] = 1
 M_df.loc[-Filter, "M"] = 0
 print(" ".join(list(M_df["M"])))
-
-
-
 
 
 # 2004 번 - 시간 초과
@@ -1294,81 +1599,6 @@ for i in range(1,10):
 print(count)
 
 
-# 2581 번 - 시간 초과
-# 문제
-# 자연수 M과 N이 주어질 때 M이상 N이하의 자연수 중 소수인 것을 모두 골라 이들 소수의 합과 최솟값을 찾는 프로그램을 작성하시오.
-# 예를 들어 M=60, N=100인 경우 60이상 100이하의 자연수 중 소수는 61, 67, 71, 73, 79, 83, 89, 97 총 8개가 있으므로, 이들 소수의 합은 620이고, 최솟값은 61이 된다.
-# 입력
-# 입력의 첫째 줄에 M이, 둘째 줄에 N이 주어진다.
-# M과 N은 10,000이하의 자연수이며, M은 N보다 작거나 같다.
-# 출력
-# M이상 N이하의 자연수 중 소수인 것을 모두 찾아 첫째 줄에 그 합을, 둘째 줄에 그 중 최솟값을 출력한다.
-# 단, M이상 N이하의 자연수 중 소수가 없을 경우는 첫째 줄에 -1을 출력한다.
-
-n=int(input())
-m=int(input())
-num_list=[i for i in range(1,m+1)]
-for i in num_list:
-    if i == 1:
-        continue
-    else:
-        for k in range(2, m+1):
-            if i*k in num_list:
-                num_list.remove(i*k)
-for i in range(1,n):
-    try:
-        num_list.remove(i)
-    except:
-        continue
-print(sum(num_list))
-print(min(num_list))
-
-
-# 2775 번 - 시간 초과
-# 문제
-# 평소 반상회에 참석하는 것을 좋아하는 주희는 이번 기회에 부녀회장이 되고 싶어
-# 각 층의 사람들을 불러 모아 반상회를 주최하려고 한다.
-# 이 아파트에 거주를 하려면 조건이 있는데,
-# “a층의 b호에 살려면 자신의 아래(a-1)층의 1호부터 b호까지 사람들의 수의 합만큼 사람들을 데려와 살아야 한다”
-# 는 계약 조항을 꼭 지키고 들어와야 한다.
-# 아파트에 비어있는 집은 없고 모든 거주민들이 이 계약 조건을 지키고 왔다고 가정했을 때,
-# 주어지는 양의 정수 k와 n에 대해 k층에 n호에는 몇 명이 살고 있는지 출력하라.
-# 단, 아파트에는 0층부터 있고 각층에는 1호부터 있으며, 0층의 i호에는 i명이 산다.
-# 입력
-# 첫 번째 줄에 Test case의 수 T가 주어진다. 그리고 각각의 케이스마다 입력으로 첫 번째 줄에 정수 k, 두 번째 줄에 정수 n이 주어진다
-# 출력
-# 각각의 Test case에 대해서 해당 집에 거주민 수를 출력하라.
-
-# 풀이 1 - 시간 초과
-def nk(k,n):
-    if k==0:
-        return n # 0층 i호는 i
-    else:
-        sum = 0
-        for i in range(1,n+1): # k층 n호는 k-1층의 1~n호 합
-            sum+=nk(k-1,i)
-        return sum
-
-for i in range(int(input())):
-    k = int(input())
-    n = int(input())
-    print(nk(k,n))
-
-# 풀이 2 - 시간 초과
-def nk(k,n):
-    if k==0:
-        return n
-    elif n==1:
-        return 1
-    else:
-        return nk(k,n-1)+nk(k-1,n)
-
-for i in range(int(input())):
-    k = int(input())
-    n = int(input())
-    print(nk(k,n))
-
-
 # 10757 번 - C 언어 문제
 # 문제
 # 두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.
@@ -1379,31 +1609,6 @@ for i in range(int(input())):
 import sys
 a,b=map(int,sys.stdin.readline().split())
 print(a+b)
-
-
-# 1978 번 - 틀림
-# 문제
-# 주어진 수 N개 중에서 소수가 몇 개인지 찾아서 출력하는 프로그램을 작성하시오.
-# 입력
-# 첫 줄에 수의 개수 N이 주어진다. N은 100이하이다. 다음으로 N개의 수가 주어지는데 수는 1,000 이하의 자연수이다.
-# 출력
-# 주어진 수들 중 소수의 개수를 출력한다.
-
-cnt=0
-n_list=[i for i in range(int(input()))]
-n_list=list(map(int,input().split()))
-m_list = [i for i in range(1, max(n_list)+1)]
-for i in m_list:
-    if i == 1:
-        continue
-    else:
-        for k in range(2, max(m_list)):
-            if i*k in m_list:
-                m_list.remove(i*k)
-for i in n_list:
-    if i in m_list:
-        cnt+=1
-print(cnt)
 
 
 # 1003 번 - 시간 초과
@@ -1425,3 +1630,19 @@ for i in range(int(input())):
     count = []
     fibonacci(int(input()),count)
     print(count.count(0), count.count(1))
+
+
+"""
+파이참 편집 기능
+# 찾아서 바꾸기
+편집할 부분을 블럭으로 씌운 다음에 Ctrl + R 로 특정 문자를 바꿈
+
+# 위 아래 코드와 줄바꿈
+해당 열에 커서를 놓고 Alt + Shift + 방향키
+
+# 동일 위치 열 편집
+Ctrl + Ctrl + 방향키
+
+# 다중 커서 편집
+Alt + 클릭
+"""
