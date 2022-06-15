@@ -8,6 +8,7 @@
         <title>Momentum App</title>
     </head>
     <body>
+        <h2 id="clock">00:00:00</h2>
         <!-- 브라우저의 validation을 사용하기 위해서는 form을 사용해야 함 -->
         <!-- form 기능을 사용하면, button 클릭 시 작성된 항목이 제출됨-->
         <form id="login-form" class="hidden">
@@ -19,8 +20,15 @@
             />
             <button>Log In</button>
         </form>
-        <h2 id="clock">00:00:00</h2>
         <h1 id="greeting" class="hidden"></h1>
+        <form id="todo_form">
+            <input 
+            type="text" 
+            placeholder="Write a To Do and Press Enter" 
+            required 
+            />
+        </form>
+        <ul id="todo_list"></ul>
         <div id="quote">
             <span></span>
             <span></span>
@@ -30,5 +38,6 @@
         <script src="JSs/clock.js"></script>
         <script src="JSs/quotes.js"></script>
         <script src="JSs/backgrounds.js"></script>
+        <script src="JSs/todolist.js"></script>
     </body>
 </html>
