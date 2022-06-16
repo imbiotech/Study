@@ -25,10 +25,8 @@ function buttonClicker(event) {
 
     // toDos array에서 해당 데이터를 삭제한 array를 만들고 toDos에 덮어씀
     toDos = toDos.filter(element => {
-        console.log(element.id === parseInt(li.id))
-        element.id === parseInt(li.id);
-        console.log(toDos);
-    })
+        return element.id !== parseInt(li.id)
+    });
     saveToDos();
 }
 
