@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css" />
+        <title>Momentum App</title>
+    </head>
+    <body>
+        <h2 id="clock">00:00:00</h2>
+        <!-- 브라우저의 validation을 사용하기 위해서는 form을 사용해야 함 -->
+        <!-- form 기능을 사용하면, button 클릭 시 작성된 항목이 제출됨-->
+        <form id="login-form" class="hidden">
+            <input 
+            required
+            maxlength="15" 
+            type="text"
+            placeholder="What is your name?"
+            />
+            <button>Log In</button>
+        </form>
+        <h1 id="greeting" class="hidden"></h1>
+        <form id="todo_form">
+            <input 
+            type="text" 
+            placeholder="Write a To Do and Press Enter" 
+            required 
+            />
+        </form>
+        <ul id="todo_list"></ul>
+        <div id="quote">
+            <span></span>
+            <span></span>
+        </div>
+        <div id="weather">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- <a href="https://nomadcoders.co">Go to courses</a> -->
+        <script src="JSs/greetings.js"></script>
+        <script src="JSs/clock.js"></script>
+        <script src="JSs/quotes.js"></script>
+        <script src="JSs/backgrounds.js"></script>
+        <script src="JSs/todolist.js"></script>
+        <script src="JSs/weather.js"></script>
+    </body>
+</html>

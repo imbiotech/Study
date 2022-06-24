@@ -1,0 +1,4 @@
+/* 표시 하지 않는 class .hidden 설정 */
+.hidden{
+    display: none; 
+}
