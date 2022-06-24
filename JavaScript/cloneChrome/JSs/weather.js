@@ -1,9 +1,6 @@
 "Variables"
 const APIKEY = "1aa3ed89c34931deceeeea725cc1f917";
 
-
-
-
 "Functions"
 function onGeoOk(position) {
     const lat = position.coords.latitude;
