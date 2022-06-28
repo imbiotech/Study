@@ -2890,7 +2890,15 @@ def merge(data): # 병합 정렬
     merge(left_data)
     merge(right_data)
     # rawdata = [5,4,8,9,0,1,2,3,7,6] 일때
-    # 5, 4 비교 //
+    # 1. left = 5, right = 4 // [4, 5]
+    # 2. left = 9, right = 0 // [0, 9]
+    # 3. left = 8, right = 0, 9 // [0, 8, 9]
+    # 4. left = 4, 5, right = 0, 8, 9 // [0, 4, 5, 8, 9]
+    # 5. left = 1, right= 2 // [1, 2]
+    # 6. left = 7, right =6 // [6, 7]
+    # 7. left = 3, right = 6, 7 // [3, 6, 7]
+    # 8. left = 1, 2, right = 3, 6, 7 // [1, 2, 3, 6, 7]
+    # 9. left= 0, 4, 5, 8, 9, right = 1, 2, 3, 6, 7 // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     left = 0
     right = 0
@@ -2914,20 +2922,19 @@ def merge(data): # 병합 정렬
             right += 1
             now += 1
 
-
+    # 어느 한 쪽이 빈 데이터가 되었을 때
+    # left의 데이터가 남아 있을 때 data에 모든 데이터를 덮어씀
     while left < len(left_data):
-        print("case2")
         data[now] = left_data[left]
         left += 1
         now += 1
 
+    # 어느 한 쪽이 빈 데이터가 되었을 때
+    # right의 데이터가 남아 있을 때 data에 모든 데이터를 덮어씀
     while right < len(right_data):
-        print("case3")
         data[now] = right_data[right]
         right += 1
         now += 1
-
-    print(f"left = {left}, \nright = {right} \nnow = {now}")
 
 # rawdata = []
 # for _ in range(int(input())):
@@ -2955,21 +2962,96 @@ for i in sorted(rawdata):
 # 출력
 # 첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다.
 
+# 풀이 1 - 메모리 초과, 모든 배열을 할당하면 메모리가 초과됨
 from sys import stdin
 input = stdin.readline
 
-def counting(): # 카운팅 정렬
-    print("a")
+def counting(data): # 카운팅 정렬
+    # data 정리를 위한 두 개의 list 생성
+    # count list은 정렬하고자 하는 최대값의 크기 만큼 생성
+    # result list은 정렬하고자 하는 데이터의 개수 크기 만큼 생성
+    count = [0] * (max(data)+1)
+    result = [0] * len(data)
 
-rawdata=[]
-for _ in int(input()):
-    rawdata.append(int(input()))
+    # count list에 정렬 데이터의 값을 index로 하여 위치 지정
+    for da in data:
+        count[da] += 1
+
+    print(count)
+    # count list의 값을 누적 적용
+    for i in range(1,len(count)):
+        count[i] += count[i-1]
+
+    # 각 데이터마다 count list에서 index를 가져오고 원본 list에서 값을 가져와 result list에 입력
+    for i in data:
+        indexing = count[i]
+        result[indexing - 1] = i
+        # 중복 데이터 입력을 위해 필요함
+        count[i] -= 1
+
+    return result
+
+rawdata = [1,7,6,43,435,42,3,4,6567,3,345,656]
+# rawdata=[]
+# for _ in range(int(input())):
+#     rawdata.append(int(input()))
+for i in counting(rawdata):
+    print(i)
+
+# 풀이 2 - 메모리 초과, dict형 변환도 아쉬운 듯
+from sys import stdin
+input = stdin.readline
+
+def counting(data): # 카운팅 정렬
+    # data 정리를 위한 두 개의 변수 생성
+    # count 를 list가 아닌 dict 형으로 바꾸는 것이 메모리에서 이익일 것 같음
+    count = {}
+    result = []
+
+    # count dict에 정렬 데이터의 값을 저장
+    for da in data:
+        try:
+            count[da] += 1
+        except:
+            count[da]= 1
+
+    # for 문으로 각 데이터의 index를 부여하고, count dict에서 개수를 가져와서 정렬
+    for i in range(max(data)+1):
+        while i in count and count[i] != 0:
+            result.append(i)
+            count[i] -= 1
+
+    return result
+
+rawdata = [1,2,2,1,5,6,3,4,3]
+# rawdata=[]
+# for _ in range(int(input())):
+#     rawdata.append(int(input()))
+for i in counting(rawdata):
+    print(i)
+
+# 풀이 3
+from sys import stdin
+input = stdin.readline
+
+n = int(input())
+# 입력받는 데이터는 1~10,000, 총 10,000,000 개의 데이터임
+rawdata=[0] * (10000+1)
+
+# 입력 받은 데이터를 index로 하여 데이터 입력
+for _ in range(n):
+    rawdata[int(input())] += 1
+
+# 1~10,000에 대해서 데이터가 존재하면 출력
+for i in range(1,10000+1):
+    for j in range(rawdata[i]):
+        print(i)
 
 
 
 
 
--
+
 
 
 """ ######################################## 아래는 수정 필요 ######################################## """
