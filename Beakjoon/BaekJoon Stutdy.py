@@ -1638,6 +1638,8 @@ for i in range(n):
 print("".join(binary_all))
 
 
+
+
 # 2558 번
 # 문제
 # 두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.
@@ -3292,6 +3294,41 @@ print(count)
 import sys
 a,b=map(int,sys.stdin.readline().split())
 print(a+b)
+
+
+
+"""
+# 풀이 1 - 시간 초과
+def fibonacci(n, listing):
+    if n == 0:
+        listing.append(n)
+        return 0, listing
+    elif n == 1:
+        listing.append(n)
+        return 1, listing
+    else:
+        return fibonacci(n-1, listing) + fibonacci(n-2, listing)
+
+for i in range(int(input())):
+    count = []
+    fibonacci(int(input()),count)
+    print(count.count(0), count.count(1))
+
+# 풀이 2
+def fibonacci(n):
+    if n == 0:
+        f_list.append(0)
+        return 0
+    elif n == 1:
+        f_list.append(1)
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+global f_list
+f_list = []
+fibonacci(6)
+print(f_list)
+"""
 
 
 
