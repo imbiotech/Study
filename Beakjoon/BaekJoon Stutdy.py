@@ -436,6 +436,47 @@ for _ in range(int(input())):
 # 출력
 # 첫째 줄에 패턴을 출력하면 된다.
 
+from sys import stdin
+input=stdin.readline
+n=int(input())
+comp=[]
+for _ in range(n):
+    if len(comp)==0:
+        comp=list(input())
+    else:
+        f=input()
+        for i in range(len(comp)):
+            if comp[i]!=f[i]:
+                comp[i]="?"
+print("".join(comp))
+
+
+# 1251 번
+# 문제
+# 알파벳 소문자로 이루어진 단어를 가지고 아래와 같은 과정을 해 보려고 한다.
+# 먼저 단어에서 임의의 두 부분을 골라서 단어를 쪼갠다.
+# 즉, 주어진 단어를 세 개의 더 작은 단어로 나누는 것이다.
+# 각각은 적어도 길이가 1 이상인 단어여야 한다.
+# 이제 이렇게 나눈 세 개의 작은 단어들을 앞뒤를 뒤집고, 이를 다시 원래의 순서대로 합친다.
+# 예를 들어,
+# 단어 : arrested
+# 세 단어로 나누기 : ar / rest / ed
+# 각각 뒤집기 : ra / tser / de
+# 합치기 : ratserde
+# 단어가 주어지면, 이렇게 만들 수 있는 단어 중에서
+# 사전순으로 가장 앞서는 단어를 출력하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 영어 소문자로 된 단어가 주어진다.
+# 길이는 3 이상 50 이하이다.
+# 출력
+# 첫째 줄에 구하고자 하는 단어를 출력하면 된다.
+
+# 예제 입력 1
+# mobitel
+# 예제 출력 1
+# bometil
+
+
 
 
 
@@ -773,13 +814,15 @@ print(count)
 from sys import *
 input = stdin.readline
 count = 0 # 횟수 체크 변수 선언
-gomgom=[]
-for _ in range(int(input())):
-    log = input()
-    if log == "ENTER": # 채팅 로그가 "입장"이면 채팅 로그 리스트 초기화
-        gomgom = []
-    elif log not in gomgom: # 채팅 로그 리스트 내에 닉네임이 없을 경우 닉네임 삽입하고, 곰곰티콘 횟수 1회 증가
-        gomgom.append(log)
+n = int(input())
+gomgom = [input() for _ in range(n)]
+
+gom = []
+for i in gomgom:
+    if i == "ENTER": # 채팅 로그가 "입장"이면 채팅 로그 리스트 초기화
+        gom = []
+    elif i not in gom: # 채팅 로그 리스트 내에 닉네임이 없을 경우 닉네임 삽입하고, 곰곰티콘 횟수 1회 증가
+        gom.append(i)
         count += 1
 print(count)
 
@@ -888,6 +931,13 @@ for i in range(1,10):
     count=min(0, n_m.index(i))
 print(count)
 
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m=str(int(factorial(n)//(factorial(m)*factorial(n-m))))
+print(len(n_m)-len(n_m.rstrip("0")))
+
+
 
 # 10757 번 - C 언어 문제
 # 문제
@@ -899,6 +949,136 @@ print(count)
 import sys
 a,b=map(int,sys.stdin.readline().split())
 print(a+b)
+
+
+# 1033 번
+# 문제
+# august14는 세상에서 가장 맛있는 칵테일이다.
+# 이 칵테일을 만드는 정확한 방법은 아직 세상에 공개되지 않았지만, 들어가는 재료 N개는 공개되어 있다.
+# 경근이는 인터넷 검색을 통해서 재료 쌍 N-1개의 비율을 알아냈고,
+# 이 비율을 이용해서 칵테일에 들어가는 전체 재료의 비율을 알아낼 수 있다.
+# 총 재료 쌍 N-1개의 비율이 입력으로 주어진다.
+# 이때, 칵테일을 만드는데 필요한 각 재료의 양을 구하는 프로그램을 작성하시오.
+# 이때, 필요한 재료의 질량을 모두 더한 값이 최소가 되어야 한다.
+# 칵테일을 만드는 재료의 양은 정수이고, 총 질량은 0보다 커야한다.
+# 비율은 "a b p q"와 같은 형식이고, a번 재료의 질량을 b번 재료의 질량으로 나눈 값이 p/q라는 뜻이다.
+#
+# 입력
+# 첫째 줄에 august14를 만드는데 필요한 재료의 개수 N이 주어지며,
+# N은 10보다 작거나 같은 자연수이다.
+# 둘째 줄부터 N-1개의 줄에는 재료 쌍의 비율이 한 줄에 하나씩 주어지는데,
+# 문제 설명에 나온 형식인 "a b p q"로 주어진다.
+# 재료는 0번부터 N-1까지이며, a와 b는 모두 N-1보다 작거나 같은 음이 아닌 정수이다.
+# p와 q는 9보다 작거나 같은 자연수이다.
+#
+# 출력
+# 첫째 줄에 칵테일을 만드는데 필요한 각 재료의 질량을 0번 재료부터 순서대로 공백으로 구분해 출력한다.
+
+N = int(input())
+ingrd = [0] * N
+for i in range(N-1):
+  a, b, c, d = map(int,input().split())
+  if ingrd[a] == 0 and ingrd[b] == 0:
+    ingrd[a] = c
+    ingrd[b] = d
+
+
+
+
+
+
+
+
+
+# 1016 번번
+# 문제
+#어떤 정수 X가 1보다 큰 제곱수로 나누어 떨어지지 않을 때, 그 수를 제곱ㄴㄴ수라고 한다. 제곱수는 정수의 제곱이다. min과 max가 주어지면, min보다 크거나 같고, max보다 작거나 같은 제곱ㄴㄴ수가 몇 개 있는지 출력한다.
+# 입력
+# 첫째 줄에 두 정수 min과 max가 주어진다.
+# 출력
+# 첫째 줄에 min보다 크거나 같고, max보다 작거나 같은 제곱ㄴㄴ수의 개수를 출력한다.
+# 제한
+# 1 ≤ min ≤ 1,000,000,000,000
+# min ≤ max ≤ min + 1,000,000
+
+
+from time import time
+# min, max 배분
+min_, max_ = map(int,input().split())
+start = time()
+
+# sqrt(max)까지 제곱수 리스트 만들기
+max_sqrt = int((max_**0.5+1))
+power = [i**2 for i in range(2, max_sqrt)]
+
+# min~max 사이의 숫자에 대해서 리스트 만들기
+numbers = [i for i in range(min_, max_+1)]
+count = 0
+
+# numbers의 element인 i를 power의 element인 j로 나눠서 나머지가 0일 때 i는 제곱ㄴㄴ수가 아님
+count = list(map(lambda i,j: (i,j), numbers, power))
+# for i in numbers:
+#   for j in power:
+#     if i%j == 0:
+#       count += 1
+#       break
+print(count)
+
+# print(len(numbers) - count)
+
+print(f"time spend = {round(time() - start, 5)}")
+
+
+
+# 10944번
+# 문제
+# 1부터 10,000까지 정수 중에서 하나를 출력한다.
+# 이 수가 채점 프로그램이 랜덤으로 얻은 수와 같으면 이 문제를 맞힐 수 있다.
+# 채점 프로그램은 채점을 할 때마다 랜덤을 수행한다.
+# 입력
+# 이 문제는 입력이 없다.
+# 출력
+# 첫째 줄에 1부터 10,000까지 정수 중에서 하나를 출력한다.
+
+from random import random
+print(int(random()*10000))
+
+
+
+# 문제
+# 666은 종말을 나타내는 숫자라고 한다.
+# 따라서, 많은 블록버스터 영화에서는 666이 들어간 제목을 많이 사용한다.
+# 영화감독 숌은 세상의 종말 이라는 시리즈 영화의 감독이다.
+# 조지 루카스는 스타워즈를 만들 때,
+# 스타워즈 1, 스타워즈 2, 스타워즈 3, 스타워즈 4, 스타워즈 5, 스타워즈 6과 같이 이름을 지었고,
+# 피터 잭슨은 반지의 제왕을 만들 때,
+# 반지의 제왕 1, 반지의 제왕 2, 반지의 제왕 3과 같이 영화 제목을 지었다.
+# 하지만 숌은 자신이 조지 루카스와 피터 잭슨을 뛰어넘는다는 것을 보여주기 위해서
+# 영화 제목을 좀 다르게 만들기로 했다.
+# 종말의 숫자란 어떤 수에 6이 적어도 3개이상 연속으로 들어가는 수를 말한다.
+# 제일 작은 종말의 숫자는 666이고, 그 다음으로 큰 수는 1666, 2666, 3666, .... 과 같다.
+# 따라서, 숌은 첫 번째 영화의 제목은 세상의 종말 666,
+# 두 번째 영화의 제목은 세상의 종말 1666 이렇게 이름을 지을 것이다.
+# 일반화해서 생각하면, N번째 영화의 제목은 세상의 종말 (N번째로 작은 종말의 숫자) 와 같다.
+# 숌이 만든 N번째 영화의 제목에 들어간 숫자를 출력하는 프로그램을 작성하시오.
+# 숌은 이 시리즈를 항상 차례대로 만들고, 다른 영화는 만들지 않는다.
+# 입력
+# 첫째 줄에 숫자 N이 주어진다. N은 10,000보다 작거나 같은 자연수이다.
+# 출력
+# 첫째 줄에 N번째 영화의 제목에 들어간 수를 출력한다.
+
+def six(n):
+  if "666" in str(n):
+    return n
+  else:
+    return
+
+sixes = list(set(map(six, range(1,4000000))))
+sixes.remove(None)
+sixes.sort()
+N=int(input())
+print(sixes[N-1])
+
 
 
 
