@@ -400,8 +400,8 @@ else:
 # 출력
 # 각각의 자동차 번호판에 대해서, 좋은 번호판이면 "nice"를, 아니면 "not nice"를 출력한다.
 
-from sys import *
-input = stdin.readline
+# from sys import *
+# input = stdin.readline
 for _ in range(int(input())):
     al,nu=input().strip().split("-")
     al_v, nu_v = 0, int(nu)
@@ -436,8 +436,8 @@ for _ in range(int(input())):
 # 출력
 # 첫째 줄에 패턴을 출력하면 된다.
 
-from sys import stdin
-input=stdin.readline
+# from sys import stdin
+# input=stdin.readline
 n=int(input())
 comp=[]
 for _ in range(n):
@@ -449,6 +449,465 @@ for _ in range(n):
             if comp[i]!=f[i]:
                 comp[i]="?"
 print("".join(comp))
+
+
+# 2004 번
+# 문제
+# binom{n}{m}의 끝자리 0의 개수를 출력하는 프로그램을 작성하시오
+# 입력
+# 첫째 줄에 정수 n, m (0 ≤ m ≤ n ≤ 2,000,000,000, n != 0 )이 들어온다.
+# 출력
+# 첫째 줄에 binom{n}{m}의 끝자리 0의 개수를 출력한다.
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = int(factorial(n)//(factorial(m)*factorial(n-m)))
+count = 0
+while n_m%10==0:
+    n_m//=10
+    count+=1
+print(count)
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = 0
+for i in n_m:
+    if i=="0":
+        count+=1
+    else:
+        break
+print(count)
+
+# 시간 초과
+from sys import stdin
+from math import factorial
+n, m = map(int,stdin.readline().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = 0
+for i in n_m:
+    if i=="0":
+        count+=1
+    else:
+        break
+print(count)
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
+n_m.reverse()
+count = len(n_m)
+for i in range(1,10):
+    count=min(0, n_m.index(i))
+print(count)
+
+# 시간 초과
+from math import factorial
+n, m = map(int,input().split())
+n_m=str(int(factorial(n)//(factorial(m)*factorial(n-m))))
+print(len(n_m)-len(n_m.rstrip("0")))
+
+# 성공, fac(n)에 포함된 2와 5의 제곱수를 토대로 0의 개수를 계산
+from math import log
+def loog(n,k):
+    if n==0:
+        return 0
+    return sum([n//k**i for i in range(1,int(log(n,k))+1)])
+
+n,m = map(int,input().split())
+print(max(0,min(loog(n,5)-loog(m,5)-loog(n-m,5),loog(n,2)-loog(m,2)-loog(n-m,2))))
+
+
+# 3003 번
+# 문제
+# 동혁이는 오래된 창고를 뒤지다가 낡은 체스판과 피스를 발견했다.
+# 체스판의 먼지를 털어내고 걸레로 닦으니 그럭저럭 쓸만한 체스판이 되었다.
+# 하지만, 검정색 피스는 모두 있었으나, 흰색 피스는 개수가 올바르지 않았다.
+# 체스는 총 16개의 피스를 사용하며,
+# 킹 1개, 퀸 1개, 룩 2개, 비숍 2개, 나이트 2개, 폰 8개로 구성되어 있다.
+# 동혁이가 발견한 흰색 피스의 개수가 주어졌을 때,
+# 몇 개를 더하거나 빼야 올바른 세트가 되는지 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 동혁이가 찾은 흰색 킹, 퀸, 룩, 비숍, 나이트, 폰의 개수가 주어진다.
+# 이 값은 0보다 크거나 같고 10보다 작거나 같은 정수이다.
+# 출력
+# 첫째 줄에 입력에서 주어진 순서대로 몇 개의 피스를 더하거나 빼야 되는지를 출력한다.
+# 만약 수가 양수라면 동혁이는 그 개수 만큼 피스를 더해야 하는 것이고, 음수라면 제거해야 하는 것이다.
+
+chess = [1,1,2,2,2,8]
+white = list(map(int,input().split()))
+chess = [chess[i]-white[i] for i in range(len(white))]
+print(*chess)
+
+
+# 4999 번
+# 문제
+# 재환이는 저스틴 비버 콘서트에서 소리를 너무 많이 질러서 인후염에 걸렸다.
+# 의사는 재환이에게 "aaah"를 말해보라고 시켰다.
+# 안타깝게도 재환이는 의사가 원하는만큼 소리를 길게 낼 수 없는 경우가 있었다.
+# 각각의 의사는 재환이에게 특정한 길이의 "aah"를 말해보라고 요청한다.
+# 어떤 의사는 "aaaaaah"를 요구하기도 하고, "h"만 요구하는 의사도 있다.
+# 모든 의사는 자신이 원하는 길이의 "aah"를 듣지 못하면 진단을 내릴 수 없다.
+# 따라서, 재환이는 집에서 자신이 얼마나 길게 "aah"를 낼 수 있는지 알아냈고,
+# 자기가 소리낼 수 있는 길이의 "aah"를 요구하는 의사를 방문하려고 한다.
+# 재환이가 낼 수 있는 "aah"의 길이와 의사가 요구하는 길이가 주어진다.
+# 이때, 그 병원에 가야하는지 말아야하는지를 알아내는 프로그램을 작성하시오.
+# 입력
+# 입력은 두 줄로 이루어져 있다.
+# 첫째 줄은 재환이가 가장 길게 낼 수 있는 "aaah"이다.
+# 둘째 줄은 의사가 듣기를 원하는 "aah"이다.
+# 두 문자열은 모두 a와 h로만 이루어져 있다.
+# a의 개수는 0보다 크거나 같고, 999보다 작거나 같으며, 항상 h는 마지막에 하나만 주어진다.
+# 출력
+# 재환이가 그 병원에 가야하면 "go"를, 아니면 "no"를 출력한다.
+
+if len(input())>=len(input()):
+    print("go")
+else:
+    print("no")
+
+
+# 2845 번
+# 문제
+# 파티가 끝나고 나면, 사람들은 누가 파티에 왔는지와 얼마나 많은 사람들이 왔는지를 궁금해한다.
+# 보통 파티는 매우 크게 열리기 때문에, 정확하게 몇 명이 참가했는지 알 수가 없다.
+# 지난주 토요일에 상근이는 자신의 3학년 진학을 기념하면서 매우 성대한 파티를 열었다.
+# 그리고, 상근이는 1m2당 몇 명의 사람이 있었는지 알고있다.
+# 상근이의 파티는 정말 엄청난 규모였기 때문에, 대부분의 신문에도 기사가 실렸다.
+# 상근이는 서로 다른 5개의 신문을 보면서 그 기사에 적혀져있는 참가자의 수를 적었다.
+# 상근이는 자신이 알고있는 참가자의 수가 정확하다고 생각한다.
+# 각 신문 기사에 실려있는 참가자의 수가 몇 명 만큼 잘못되어있는지 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 1m2당 사람의 수 L (1 ≤ L ≤ 10)과 파티가 열렸던 곳의 넓이 P (1 ≤ P ≤ 1000)가 주어진다.
+# 둘째 줄에는 각 기사에 실려있는 참가자의 수가 주어진다.
+# 106보다 작은 양의 정수 5개가 주어진다.
+# 출력
+# 출력은 첫째 줄에 다섯 개의 숫자를 출력해야 한다.
+# 이 숫자는 상근이가 계산한 참가자의 수와  각 기사에 적혀있는 참가자의 수의 차이이다.
+
+L, P = map(int,input().split())
+news = list(map(int,input().split()))
+print(*[news[i]-L*P for i in range(5)])
+
+
+# 4504 번
+# 문제
+# 정수 n(0 < n < 1000)과 수의 목록이 주어졌을 때,
+# 목록에 들어있는 수가 n의 배수인지 아닌지를 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 n이 주어진다.
+# 다음 줄부터 한 줄에 한 개씩 목록에 들어있는 수가 주어진다.
+# 이 수는 0보다 크고, 10,000보다 작다. 목록은 0으로 끝난다.
+# 출력
+# 목록에 있는 수가 n의 배수인지 아닌지를 구한 뒤 예제 출력처럼 출력한다.
+# 예제 입력 1
+# 3
+# 1
+# 7
+# 99
+# 321
+# 777
+# 0
+# 예제 출력 1
+# 1 is NOT a multiple of 3.
+# 7 is NOT a multiple of 3.
+# 99 is a multiple of 3.
+# 321 is a multiple of 3.
+# 777 is a multiple of 3.
+
+n=int(input())
+l=[]
+while True:
+    m=int(input())
+    if m==0:
+        break
+    l.append(m)
+for i in l:
+    if i%n==0:
+        print(f"{i} is a multiple of {n}.")
+    else:
+        print(f"{i} is NOT a multiple of {n}.")
+
+
+# 11575 번
+# 문제
+# 서쪽나라에서 특수훈련을 받은 정은이는 동쪽나라로 침투를 하게 되었다.
+# 뛰어난 스파이였던 정은이는 동쪽나라의 정보를 입수하게 되었고
+# 정보를 안전하게 서쪽나라로 전달하기 위해 아핀 암호(Affine Cipher)를 이용하기로 하였다.
+# 아핀 암호는 다음과 같은 식을 통해 구할 수 있다.
+# E(X) = (aX + b) mod 26
+# A부터 Z까지의 알파벳을 차례대로 0, 1, 2, ... , 25 라고 하자.
+# a = 3이고, b = 1인 경우에 알파벳 A를 아핀 암호식에 대입하면
+# E(0) = (3 × 0 + 1) mod 26 이 되어 암호화된 결과는 B가 된다.
+# a와 b, 그리고 알파벳 대문자로만 구성된 평문이 주어졌을 때,
+# 이를 암호문으로 치환하는 프로그램을 작성하라.
+# 입력
+# 입력의 첫 줄에는 테스트 케이스의 개수 T(1 ≤ T ≤ 50) 가 주어진다.
+# 각 테스트 케이스의 첫 번째 줄에는 두 정수 a와 b(0 < a, b ≤ 1,000,000)의 값이 주어진다.
+# a는 26과 서로소이다.
+# 각 테스트케이스의 두 번째 줄에는 평문 s가 주어진다.
+# 평문의 길이 |s|는 0보다 크고 1,000,000보다 작다.
+# 출력
+# 각 테스트 케이스마다 한 줄에 한 개씩 평문 s를 암호문으로 치환한 결과를 출력한다.
+# 예제 입력 1
+# 2
+# 3 1
+# IAMSPY
+# 5 3
+# ABCDEFGHIJKLMNOPQRSTUVWXYZ
+# 예제 출력 1
+# ZBLDUV
+# DINSXCHMRWBGLQVAFKPUZEJOTY
+
+for _ in range(int(input())):
+    a,b = map(int,input().split())
+    s=input()
+    t=""
+    for i in s:
+        # E(X) = (aX + b) mod 26
+        t+=chr((a*(ord(i)-65)+b)%26+65)
+    print(t)
+
+
+# 2774 번
+# 문제
+# 윤정이는 뭐든지 아름다운 것이 좋다고 생각한다.
+# 그래서 윤정이는 사물을 볼 때 자신이 정한 방법으로 아름다운 정도를 평가한다.
+# 윤정이는 수를 볼 때도 이런 아름다운 수의 정도를 따지는데,
+# 윤정이에게 있어서 아름다운 수의 정도는 그 수를 이루고 있는 10진수의 서로 다른 숫자의 개수를 의미한다.
+# 예를 들어 122이라는 수는 1과 2 라는 2개의 숫자로 이루어져 있으므로 아름다운 정도가 2가 된다.
+# 윤정이의 방법으로 여러 수들의 아름다운 정도를 알아보자.
+# 입력
+# 첫째 줄에는 테스트 케이스의 개수 T가 주어진다.
+# 다음 줄부터는 아름다운 정도를 알고 싶은 수 X(1 ≤ X ≤ 1000000000)가 주어진다.
+# 출력
+# 각각의 테스트 케이스마다 X의 아름다운 정도를 한 줄에 하나씩 입력으로 주어진 순서대로 출력한다.
+
+for _ in range(int(input())):
+    print(len(set(input())))
+
+
+# 1453 번
+# 문제
+# 세준이는 피시방에서 아르바이트를 한다.
+# 세준이의 피시방에는 1번부터 100번까지 컴퓨터가 있다.
+# 들어오는 손님은 모두 자기가 앉고 싶은 자리에만 앉고싶어한다.
+# 따라서 들어오면서 번호를 말한다.
+# 만약에 그 자리에 사람이 없으면 그 손님은 그 자리에 앉아서 컴퓨터를 할 수 있고,
+# 사람이 있다면 거절당한다.
+# 거절당하는 사람의 수를 출력하는 프로그램을 작성하시오.
+# 자리는 맨 처음에 모두 비어있고,
+# 어떤 사람이 자리에 앉으면 자리를 비우는 일은 없다.
+# 입력
+# 첫째 줄에 손님의 수 N이 주어진다.
+# N은 100보다 작거나 같다.
+# 둘째 줄에 손님이 들어오는 순서대로 각 손님이 앉고 싶어하는 자리가 입력으로 주어진다.
+# 출력
+# 첫째 줄에 거절당하는 사람의 수를 출력한다.
+
+int(input())
+c=list(map(int,input().split()))
+print(len(c)-len(set(c)))
+
+
+# 5586 번
+# 문제
+# 입력으로 주어지는 문자열에서 연속으로 3개의 문자가 JOI 또는 IOI인 곳이 각각 몇 개 있는지 구하는 프로그램을 작성하시오.
+# 문자열은 알파벳 대문자로만 이루어져 있다.
+# 예를 들어, 아래와 같이 "JOIOIOI"에는 JOI가 1개, IOI가 2개 있다.
+# 입력
+# 첫째 줄에 알파벳 10000자 이내의 문자열이 주어진다.
+# 출력
+# 첫째 줄에 문자열에 포함되어 있는 JOI의 개수, 둘째 줄에 IOI의 개수를 출력한다.
+
+j,i=0,0 # 정규 표현식은 나중에 공부...
+S=input()
+for x in range(len(S)):
+    if x==len(S)-2:
+        break
+    if S[x:x+3]=="JOI":
+        j+=1
+    elif S[x:x+3]=="IOI":
+        i+=1
+print(f"{j}\n{i}")
+
+
+# 2702 번
+
+# 문제
+# 두 정수 a와 b 최소공배수는 두 수의 공통된 배수 중 가장 작은 수이고,
+# 최대공약수는 두 수의 공통된 약수중 가장 큰 수이다.
+# a와 b가 주어졌을 때, 최소공배수와 최대공약수를 구하는 프로그램을 작성하시오.
+# 입력
+# 첫째 줄에 테스트 케이스의 개수 T(1<=T<=1,000)가 주어진다.
+# 각 테스트 케이스는 두 정수 a와 b로 이루어져 있고, 공백으로 구분되어 있다. (1 <= a,b <= 1,000)
+# 출력
+# 각 테스트 케이스에 대해 최소공배수와 최대공약수를 차례대로 출력한다.
+
+# 풀이 1
+def diviser(num):
+    divs = []
+    for i in range(1, num + 1):
+        if num % i == 0:
+            divs.append(i)
+    return divs
+
+for _ in range(int(input())):
+    a, b = map(int, input().split())
+    dis_a = diviser(a)
+    dis_b = diviser(b)
+    max_div = max([x for x in dis_a if x in dis_b])
+    min_mul = int(a * b / max_div)
+    print(f"{min_mul} {max_div}")
+
+# 풀이 2
+from math import lcm, gcd
+for _ in range(int(input())):
+    a, b = map(int, input().split())
+    print(f"{lcm(a,b)} {gcd(a,b)}")
+
+
+# 5656 번
+# 문제
+# C언어의 비교 연산자는 아래 표에 나와있다.
+# 연산자	뜻
+# >   	크다
+# >=	    크거나 같다
+# <	    작다
+# <=	    작거나 같다
+# ==  	같다
+# !=	    같지 않다
+# 이 연산자는 두 피연산자를 비교하고, (왼쪽 값과 오른쪽 값) true또는 false (1 또는 0)을 리턴한다.
+# 예를 들어, 2 > 3은 "false"를 리턴하고 (2는 3보다 작기 때문),
+# 3 != 4는 "true", 3 >= 3은 "true"를 리턴한다.
+# C언어의 비교 연산식이 주어졌을 때, 결과를 구하는 프로그램을 작성하시오.
+# 입력
+# 입력은 최대 12000줄로 이루어져 있다.
+# 각 줄은 두 정수 a, b가 주어지며,
+# 정수 사이에는 연산자 ">", ">=", "<", "<=", "==", "!="중 하나가 주어진다.
+# 연산자와 피연산자 사이에는 공백이 하나 있으며,
+# 연산자로 "E"가 주어진 경우에는 프로그램을 끝낸다. (-10000 ≤ a,b ≤ 10000)
+# 출력
+# 입력의 각 줄 마다 입력으로 주어진 식의 결과가 "true"인지 "false"인지 출력한다.
+
+cnt=0
+while True:
+    a = input().split()
+    b,c,d=int(a[0]),a[1],int(a[2])
+    cnt+=1
+    if c == "E":
+        break
+    if c == ">":
+        bol=b > d
+    elif c == ">=":
+        bol=b >= d
+    elif c == "<":
+        bol=b < d
+    elif c == "<=":
+        bol=b <= d
+    elif c == "==":
+        bol=b == d
+    else:
+        bol=b != d
+    print(f"Case {cnt}: {str(bol).lower()}")
+
+
+# 2720 번
+# 문제
+# 미국으로 유학간 동혁이는 세탁소를 운영하고 있다.
+# 동혁이는 최근에 아르바이트로 고등학생 리암을 채용했다.
+# 동혁이는 리암에게 실망했다.
+# 리암은 거스름돈을 주는 것을 자꾸 실수한다.
+# 심지어 $0.5달러를 줘야하는 경우에 거스름돈으로 $5달러를 주는것이다!
+# 어쩔수 없이 뛰어난 코딩 실력을 발휘해 리암을 도와주는 프로그램을 작성하려고 하지만,
+# 디아블로를 하느라 코딩할 시간이 없어서 이 문제를 읽고 있는 여러분이 대신 해주어야 한다.
+# 거스름돈의 액수가 주어지면 리암이 줘야할
+# 쿼터(Quarter, $0.25)의 개수,
+# 다임(Dime, $0.10)의 개수,
+# 니켈(Nickel, $0.05)의 개수,
+# 페니(Penny, $0.01)의 개수를 구하는 프로그램을 작성하시오.
+# 거스름돈은 항상 $5.00 이하이고, 손님이 받는 동전의 개수를 최소로 하려고 한다.
+# 예를 들어, $1.24를 거슬러 주어야 한다면, 손님은 4쿼터, 2다임, 0니켈, 4페니를 받게 된다.
+# 입력
+# 첫째 줄에 테스트 케이스의 개수 T가 주어진다.
+# 각 테스트 케이스는 거스름돈 C를 나타내는 정수 하나로 이루어져 있다.
+# C의 단위는 센트이다. (1달러 = 100센트) (1<=C<=500)
+# 출력
+# 각 테스트케이스에 대해 필요한 쿼터의 개수, 다임의 개수, 니켈의 개수, 페니의 개수를 공백으로 구분하여 출력한다.
+# 예제 입력 1
+# 3
+# 124
+# 25
+# 194
+# 예제 출력 1
+# 4 2 0 4
+# 1 0 0 0
+# 7 1 1 4
+
+coin=[25,10,5,1]
+for _ in range(int(input())): # T
+    c=int(input())
+    b=[0]*4
+    for i in range(4):
+        b[i]=int(c//coin[i])
+        c%=coin[i]
+    # b[0]=int(c//25)
+    # c%=25
+    # b[1]=int(c//10)
+    # c%=10
+    # b[2]=int(c//5)
+    # c%=5
+    # b[3]=int(c//1)
+    print(*b)
+
+
+# 2495 번
+# 문제
+# 여덟 자리의 양의 정수가 주어질 때,
+# 그 안에서 연속하여 같은 숫자가 나오는 것이 없으면 1을 출력하고,
+# 있으면 같은 숫자가 연속해서 나오는 구간 중 가장 긴 것의 길이를 출력하는 프로그램을 작성하라.
+# 예를 들어 세 개의 숫자 12345123, 17772345, 22233331이 주어졌다고 하자.
+# 12345123은 연속하여 같은 숫자가 나오는 것이 없으므로 1을 출력하고,
+# 17772345는 7이 세 개 연속하여 나오므로 3을 출력하며,
+# 22233331의 경우에는 2가 세 개, 3이 네 개 연속해서 나오므로 그 중 큰 값인 4를 출력하여야 한다.
+# 입력
+# 첫째 줄부터 셋째 줄까지 각 줄에 하나씩 세 개의 여덟 자리 양의 정수가 주어진다.
+# 출력
+# 첫째 줄에서 셋째 줄까지 한 줄에 하나씩 각 입력된 수 내에서 같은 숫자가 연속하여 나오는 가장 긴 길이를 입력 순서대로 출력한다.
+# 예제 입력 1
+# 12345123
+# 17772345
+# 22233331
+# 예제 출력 1
+# 1
+# 3
+# 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 1251 번
@@ -471,6 +930,7 @@ print("".join(comp))
 # 출력
 # 첫째 줄에 구하고자 하는 단어를 출력하면 된다.
 
+
 # 예제 입력 1
 # mobitel
 # 예제 출력 1
@@ -478,15 +938,22 @@ print("".join(comp))
 
 
 
+n=len("aba")
+lam = lambda n: [[[x,y,n-x-y] for x in range(n) for y in range(x+1, n-1)] for _ in range(n)]
+print(lam(n))
+
+print(list(map(lambda x: [x,n-x-y],range(1,n-2))))
 
 
 
 
 
+from itertools import combinations
+for i in combinations(range(10),3):
+    print(i)
 
 
-
-
+list(map(lambda x,y: [x,y], [x for x in range(5)]), [y for y in range(5,10)])
 
 
 
@@ -501,6 +968,7 @@ print("".join(comp))
 """ ######################################## 아래는 수정 필요 ######################################## """
 """ ######################################## 아래는 수정 필요 ######################################## """
 """ ######################################## 아래는 수정 필요 ######################################## """
+
 
 # 2086 번 - 시간 초과
 # 문제
@@ -528,8 +996,8 @@ while True:
 print(sum(fib[a:b+1])%10**9)
 
 # 풀이 2 - 시간 초과
-from sys import *
-input=stdin.readline
+# from sys import *
+# input=stdin.readline
 fib = [0,1,1]
 getdata = list(map(int,input().split()))
 a = min(getdata)
@@ -547,10 +1015,6 @@ else:
         if a==0 and b<3:
             break
     print(sum(fib)%10**9)
-
-
-
-
 
 
 # 1934 번 - 통과는 했는데 시간 개선 필요
@@ -707,19 +1171,6 @@ while True:
     print(time() - stt)
 
 
-100000
-8392
-7.807872772216797
-
-
-
-
-
-
-
-
-
-
 # 2617 번
 # 문제
 # 모양은 같으나, 무게가 모두 다른 N개의 구슬이 있다. N은 홀수이며, 구슬에는 번호가 1,2,...,N으로 붙어 있다.
@@ -797,8 +1248,8 @@ v_in_p = password.intersection(vowel)
 # 채팅 기록 중 곰곰티콘이 사용된 횟수를 출력하시오.
 
 # 풀이 1
-from sys import *
-input = stdin.readline
+# from sys import *
+# input = stdin.readline
 count = 0 # 횟수 체크 변수 선언
 gomgom=[]
 for _ in range(int(input())):
@@ -811,8 +1262,8 @@ for _ in range(int(input())):
 print(count)
 
 # 풀이 2
-from sys import *
-input = stdin.readline
+# from sys import *
+# input = stdin.readline
 count = 0 # 횟수 체크 변수 선언
 n = int(input())
 gomgom = [input() for _ in range(n)]
@@ -825,16 +1276,6 @@ for i in gomgom:
         gom.append(i)
         count += 1
 print(count)
-
-
-
-
-
-
-
-
-
-
 
 
 # 10815 번 - 시간 초과
@@ -874,69 +1315,6 @@ Filter = M_df["M"].isin(N_df["N"])
 M_df.loc[Filter, "M"] = 1
 M_df.loc[-Filter, "M"] = 0
 print(" ".join(list(M_df["M"])))
-
-
-# 2004 번 - 시간 초과
-# 문제
-# binom{n}{m}의 끝자리 $0$의 개수를 출력하는 프로그램을 작성하시오
-# 입력
-# 첫째 줄에 정수 n, m (0 ≤ m ≤ n ≤ 2,000,000,000, n != 0 )이 들어온다.
-# 출력
-# 첫째 줄에 binom{n}{m}의 끝자리 0의 개수를 출력한다.
-
-# 시간 초과
-from math import factorial
-n, m = map(int,input().split())
-n_m = int(factorial(n)//(factorial(m)*factorial(n-m)))
-count = 0
-while n_m%10==0:
-    n_m//=10
-    count+=1
-print(count)
-
-# 시간 초과
-from math import factorial
-n, m = map(int,input().split())
-n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
-n_m.reverse()
-count = 0
-for i in n_m:
-    if i=="0":
-        count+=1
-    else:
-        break
-print(count)
-
-# 시간 초과
-from sys import stdin
-from math import factorial
-n, m = map(int,stdin.readline().split())
-n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
-n_m.reverse()
-count = 0
-for i in n_m:
-    if i=="0":
-        count+=1
-    else:
-        break
-print(count)
-
-# 시간 초과
-from math import factorial
-n, m = map(int,input().split())
-n_m = list(str(int(factorial(n)//(factorial(m)*factorial(n-m)))))
-n_m.reverse()
-count = len(n_m)
-for i in range(1,10):
-    count=min(0, n_m.index(i))
-print(count)
-
-# 시간 초과
-from math import factorial
-n, m = map(int,input().split())
-n_m=str(int(factorial(n)//(factorial(m)*factorial(n-m))))
-print(len(n_m)-len(n_m.rstrip("0")))
-
 
 
 # 10757 번 - C 언어 문제
@@ -983,13 +1361,6 @@ for i in range(N-1):
     ingrd[b] = d
 
 
-
-
-
-
-
-
-
 # 1016 번번
 # 문제
 #어떤 정수 X가 1보다 큰 제곱수로 나누어 떨어지지 않을 때, 그 수를 제곱ㄴㄴ수라고 한다. 제곱수는 정수의 제곱이다. min과 max가 주어지면, min보다 크거나 같고, max보다 작거나 같은 제곱ㄴㄴ수가 몇 개 있는지 출력한다.
@@ -1000,7 +1371,6 @@ for i in range(N-1):
 # 제한
 # 1 ≤ min ≤ 1,000,000,000,000
 # min ≤ max ≤ min + 1,000,000
-
 
 from time import time
 # min, max 배분
@@ -1029,7 +1399,6 @@ print(count)
 print(f"time spend = {round(time() - start, 5)}")
 
 
-
 # 10944번
 # 문제
 # 1부터 10,000까지 정수 중에서 하나를 출력한다.
@@ -1042,7 +1411,6 @@ print(f"time spend = {round(time() - start, 5)}")
 
 from random import random
 print(int(random()*10000))
-
 
 
 # 문제
